@@ -1,0 +1,69 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "camelcase": [
+      0,
+      {
+        "properties": "never"
+      }
+    ],
+    "comma-dangle": 0,
+    "consistent-return": 1,
+    "max-len": 0,
+    "no-shadow": 1,
+    "no-var": 1,
+    "no-unused-vars": [
+      1,
+      {
+        "vars": "local",
+        "args": "after-used"
+      }
+    ],
+    "no-undef": [
+      0,
+      {
+        "typeof": true
+      }
+    ],
+    "object-curly-spacing": [
+      2,
+      "never"
+    ],
+    "prefer-rest-params": 0,
+    "spaced-comment": [
+      0
+    ],
+    "strict": [
+      0,
+      "global"
+    ],
+    "vars-on-top": 0,
+    "react/prop-types": 1,
+    "no-use-before-define": [
+      0,
+      {
+        "functions": true,
+        "classes": true
+      }
+    ],
+    "prefer-cons": [
+      0
+    ],
+    "no-param-reassign": [
+      1,
+      {
+        "props": false
+      }
+    ],
+    "no-plusplus": [
+      2,
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "arrow-parens": [
+      2,
+      "as-needed"
+    ]
+  }
+}
