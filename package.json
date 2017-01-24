@@ -3,14 +3,32 @@
   "version": "0.0.1",
   "description": "Vue.js 2.0 server-side renderer for *.vue file with Node.js.",
   "main": "index.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "scripts": {
     "build": "cd client; webpack -p",
     "test": "mocha test",
     "example-koa": "cd example/koa/component; webpack -p;cd ..; node app.js",
     "example-express": "cd example/express/component; webpack -p;cd ..; node app.js"
   },
-  "author": "jiangq.leaves@gmail.com",
+  "author": {
+    "name": "leaves4j",
+    "email": "jiangq.leaves@gmail.com",
+    "url": "http://blog.leaflives.com"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/leaves4j/vue-easy-renderer.git"
+  },
+  "keywords": [
+    "vue",
+    "vue-server-renderer",
+    "vue server renderer",
+    "render",
+    "renderer"
+  ],
   "dependencies": {
     "babel-core": "^6.22.0",
     "babel-loader": "^6.2.10",
