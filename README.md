@@ -212,3 +212,7 @@ Then the result
 </body>
 </html>
 ```
+
+##License
+
+MIT
