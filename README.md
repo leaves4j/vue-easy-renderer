@@ -213,6 +213,10 @@ Then the result
 </html>
 ```
 
+`vue-easy-render` uses [vue-meta](https://github.com/declandewet/vue-meta) to update the headers and html attributes of your application. You can take a look at [vue-meta documentation](https://github.com/declandewet/vue-meta) for the list of options you can give to head.
+
+
+
 ##License
 
 MIT
