@@ -30,7 +30,7 @@ describe('Renderer', () => {
     const renderer = new Renderer(compiler);
 
     renderer.renderToString(filePath, {hello: 'world!'}).then(string => {
-      expect(string).to.contain('<div server-rendered="true" class="test" data-v-70ba3b7b>hello world!</div>');
+      expect(string).to.contain('<div server-rendered="true" class="test" data-v-ae5aeefe>hello world!</div>');
       mfs.unlinkSync(filePath);
       done();
     }).catch(e => {
