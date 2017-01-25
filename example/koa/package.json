@@ -1,0 +1,21 @@
+{
+  "name": "koa-example",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build": "cd component;webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.0.0",
+    "koa-static": "^2.0.0",
+    "vue-easy-renderer": "^0.1.0"
+  },
+  "devDependencies": {
+    "webpack": "^2.2.0",
+    "extract-text-webpack-plugin": "^2.0.0-beta.5"
+  }
+}

@@ -2,7 +2,6 @@
 
 const webpack = require('webpack');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const webpack_config = {
   entry: {
@@ -11,6 +10,7 @@ const webpack_config = {
   output: {
     path: '../dist/',
     filename: '[name].js',
+    libraryTarget: 'commonjs2'
   },
   module: {
     rules: [
@@ -23,9 +23,6 @@ const webpack_config = {
         exclude: /node_modules/
       },
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin('../dist/style/[name].css')
-  ]
+  }
 };
 module.exports = webpack_config;
