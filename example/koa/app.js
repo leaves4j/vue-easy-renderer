@@ -4,7 +4,7 @@ const path = require('path');
 const Koa = require('koa');
 const serve = require('koa-static');
 
-const vueEasyRenderer = require('../../index').koaRenderer;
+const vueEasyRenderer = require('vue-easy-renderer').koaRenderer;
 
 const renderer = vueEasyRenderer(path.resolve(__dirname, './component'), {
   head: {

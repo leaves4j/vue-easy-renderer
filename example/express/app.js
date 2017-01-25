@@ -3,7 +3,7 @@
 const path = require('path');
 const express = require('express');
 
-const vueFileRenderer = require('../../index').connectRenderer;
+const vueFileRenderer = require('vue-easy-renderer').connectRenderer;
 
 const renderer = vueFileRenderer(path.resolve(__dirname, './component'), {
   head: {

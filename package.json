@@ -9,9 +9,17 @@
   "scripts": {
     "build": "cd client; webpack -p",
     "test": "mocha test",
-    "example-koa": "cd example/koa/component; webpack -p;cd ..; node app.js",
-    "example-express": "cd example/express/component; webpack -p;cd ..; node app.js"
+    "preversion": "npm test",
+    "version": "npm run build && git add -A",
+    "postversion": "git push && git push --tags"
   },
+  "files": [
+    "index.js",
+    "koa.js",
+    "connect.js",
+    "lib",
+    "dist"
+  ],
   "author": {
     "name": "leaves4j",
     "email": "jiangq.leaves@gmail.com",
@@ -54,7 +62,6 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-vue": "^1.0.0",
-    "express": "^4.14.0",
     "mocha": "^3.2.0",
     "sass-loader": "^4.1.1",
     "vue-style-loader": "^1.0.0"
