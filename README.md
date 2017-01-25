@@ -144,7 +144,7 @@ const vueEasyRenderer = require('vue-easy-renderer').connectRenderer;
 | basePath | `String` | `*.vue` file base path |
 | [options] | `Object` | renderer options |
 | [options.preCompile] \(unsuport now) | `Array` | pre-compile `*.vue` file list |
-| streamFlag | `Boolean` | default `true`, render to stream or string |
+| [options.streamFlag] | `Boolean` | default `true`, render to stream or string |
 | [options.head] | `Object` | common html head config see detail in [Component Head](#component-head) |
 | [options.webpackConfig] | `Object` | server-side compiler webpack config, default config use `vue-loader` with `css-loader` and `babel-loader` in `preset-es2015 preset-stage-2`|
 
