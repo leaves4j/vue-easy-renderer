@@ -3,9 +3,9 @@
 const meta = require('vue-meta');
 
 if (typeof Object.assign !== 'function') {
-  Object.assign = function (target) {
+  Object.assign = target => {
     if (target == null) {
-      throw new TypeError('Cannot convert undefined or null to object');
+      throw new TypeError('Object.assign() Cannot convert undefined or null to object');
     }
 
     target = Object(target);
@@ -26,15 +26,17 @@ if (typeof Object.assign !== 'function') {
 const vueEasyRenderer = {};
 vueEasyRenderer.install = (Vue, options) => {
   Vue.use(meta, {keyName: 'head'});
-
   Vue.mixin({
     beforeCreate() {
-      if (this.$isServer) return;
-      const initData = window.__VUE_INITIAL_DATA__ || {};
-      const data = typeof this.$options.data === 'function'
-      ? this.$options.data.call(this)
-      : this.$options.data || {};
-      this.$options.data = Object.assign(data, initData);
+      if (this.$isServer || this.$parent) return;
+      const initState = window.__VUE_INITIAL_STATE__;
+      const data = typeof this.$options.data === 'function' ?
+        this.$options.data.call(this) :
+        this.$options.data || {};
+      this.$options.data = Object.assign(data, initState || {});
+      if (this.$options.store && initState) {
+        this.$options.store.replaceState(initState);
+      }
     }
   });
 };
