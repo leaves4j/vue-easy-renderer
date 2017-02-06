@@ -64,6 +64,7 @@
     "arrow-parens": [
       2,
       "as-needed"
-    ]
+    ],
+    "eol-last": [2, "never"]
   }
 }
