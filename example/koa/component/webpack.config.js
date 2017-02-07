@@ -20,7 +20,7 @@ const webpack_config = {
         options: {
           loaders: {
             js: 'babel-loader',
-            css: ExtractTextPlugin.extract({fallbackLoader: 'vue-style-loader', loader: 'css-loader!sass-loader'})
+            css: ExtractTextPlugin.extract({fallback: 'vue-style-loader', use: 'css-loader'})
           }
         }
       },
@@ -34,6 +34,7 @@ const webpack_config = {
       },
     ]
   },
+  context: path.resolve('../component'),
   plugins: [
     new ExtractTextPlugin('../dist/style/[name].css')
   ]
