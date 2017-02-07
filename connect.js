@@ -12,6 +12,8 @@ function vueEasyRenderer(basePath, rendererConfig) {
   const useStore = rendererConfig && rendererConfig.store;
   const preCompile = (rendererConfig && rendererConfig.preCompile) || [];
 
+  preCompile.forEach(filePath => compiler.compile(path.resolve(basePath, filePath)));
+
   const compiler = new Compiler({webpackConfig});
   const renderer = new Renderer(compiler, {head, useStore});
   return (req, res, next) => {

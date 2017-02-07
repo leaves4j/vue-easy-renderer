@@ -14,6 +14,9 @@ function vueEasyRenderer(basePath, rendererConfig) {
 
   const compiler = new Compiler({webpackConfig});
   const renderer = new Renderer(compiler, {head, useStore});
+
+  preCompile.forEach(filePath => compiler.compile(path.resolve(basePath, filePath)));
+
   return (ctx, next) => {
     ctx.vueRender = (vueFilePath, context, config) => {
       ctx.set('Content-Type', 'text/html');
