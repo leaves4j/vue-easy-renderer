@@ -99,7 +99,7 @@ The browser get the html:
 ```html
 <html>
 <head>
- <script>window.__VUE_INITIAL_DATA__ = {"world":"world!"};</script>
+ <script>window.__VUE_INITIAL_STATE__ = {"world":"world!"};</script>
 </head>
 <body>
   <div server-rendered="true" data-v-30ca8d89>hello world!</div>
@@ -143,7 +143,8 @@ const vueEasyRenderer = require('vue-easy-renderer').connectRenderer;
 | --- | --- | --- |
 | basePath | `String` | `*.vue` file base path |
 | [options] | `Object` | renderer options |
-| [options.preCompile] \(unsuport now) | `Array` | pre-compile `*.vue` file list |
+| [options.store] | `String` | enum `'on'` `'off'` `'auto'`, default `'auto'`. when is 'on', renderer use vuex store, when 'auto', renderer will check the vue options, then renderer set data to vuex or vue data depend on vue options 'store' property|
+| [options.preCompile] | `Array` | pre-compile `*.vue` file list |
 | [options.streamFlag] | `Boolean` | default `true`, render to stream or string |
 | [options.head] | `Object` | common html head config see detail in [Component Head](#component-head) |
 | [options.webpackConfig] | `Object` | server-side compiler webpack config, default config use `vue-loader` with `css-loader` and `babel-loader` in `preset-es2015 preset-stage-2`|
