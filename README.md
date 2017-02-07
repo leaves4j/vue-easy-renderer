@@ -69,7 +69,7 @@ module.exports = app;
 
 ```
 
-###Express.js
+### Express.js
 
 ```js
 'use strict';
@@ -108,9 +108,9 @@ The browser get the html:
 ```
 Detail in [Full example](https://github.com/leaves4j/vue-easy-renderer/tree/master/example)
 
-##API
+## API
 
-###vueRender(path,data,config)
+### vueRender(path,data,config)
 
 Use `ctx.vueRender()` in koa.js or `res.vueRender()` in express
 
@@ -121,9 +121,9 @@ Use `ctx.vueRender()` in koa.js or `res.vueRender()` in express
 | [config] | `Object` | renderer config |
 | [config.pure] | `Boolean` | default `false`, `pure:true` will  render `*.vue` file without head and tail
 
-##Renderer Options
+## Renderer Options
 
-###vueEasyRenderer(basePath,options)
+### vueEasyRenderer(basePath,options)
 
 With `Koa.js 2`
 
@@ -205,7 +205,7 @@ Then the result
 <head>
  <title data-vue-meta="true">hello</title>
  <link data-vue-meta="true" rel="stylesheet" href="/style/hello_world.css"/>
- <script>window.__VUE_INITIAL_DATA__ = {"world":"world!"};</script>
+ <script>window.__VUE_INITIAL_STATE__ = {"world":"world!"};</script>
  <script data-vue-meta="true" src="/hello_world.js" async="true"></script>
 </head>
 <body data-vue-meta="">
@@ -218,6 +218,6 @@ Then the result
 
 
 
-##License
+## License
 
 MIT
