@@ -51,4 +51,18 @@ describe('Renderer', () => {
       mfs.unlinkSync(filePath);
     });
   });
+  it('Renderer should be ok with store', done => {
+    const filePath = path.resolve(__dirname, '../vue_file/store.vue');
+    const compiler = new Compiler();
+    const renderer = new Renderer(compiler, {useStore: 'auto'});
+
+    renderer.renderToString(filePath, {world: 'world!'}).then(string => {
+      expect(string).to.contain('<div server-rendered="true" class="test" data-v-4f52fa3c>hello world!</div>');
+      mfs.unlinkSync(filePath);
+      done();
+    }).catch(e => {
+      done(e);
+      mfs.unlinkSync(filePath);
+    });
+  });
 });
