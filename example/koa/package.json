@@ -12,7 +12,10 @@
   "dependencies": {
     "koa": "^2.0.0",
     "koa-static": "^2.0.0",
-    "vue-easy-renderer": "^0.1.0"
+    "vue": "^2.1.10",
+    "vue-easy-renderer": "^0.2.0",
+    "vue-loader": "^10.3.0",
+    "vuex": "^2.1.2"
   },
   "devDependencies": {
     "webpack": "^2.2.0",
