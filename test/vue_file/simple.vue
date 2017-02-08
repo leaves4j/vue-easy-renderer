@@ -19,5 +19,5 @@
     methods: {},
     computed: {},
     components: {}
-  }
+  };
 </script>
