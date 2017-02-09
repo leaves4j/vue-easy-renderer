@@ -11,11 +11,12 @@ function vueEasyRenderer(basePath, rendererConfig) {
   const streamFlag = !(rendererConfig && rendererConfig.stream);
   const useStore = rendererConfig && rendererConfig.store;
   const preCompile = (rendererConfig && rendererConfig.preCompile) || [];
+  const plugins = (rendererConfig && rendererConfig.plugins) || [];
 
   preCompile.forEach(filePath => compiler.compile(path.resolve(basePath, filePath)));
 
   const compiler = new Compiler({webpackConfig, basePath: path.resolve(basePath)});
-  const renderer = new Renderer(compiler, {head, useStore});
+  const renderer = new Renderer(compiler, {head, useStore, plugins});
   return (req, res, next) => {
     res.vueRender = (vueFilePath, context, config) => {
       res.set('Content-Type', 'text/html');
