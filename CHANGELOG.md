@@ -1,3 +1,8 @@
+v0.3.0 / 2017-02-09
+---
+## Changes
+  * add vue plugin support
+ 
 v0.2.1 / 2017-02-07
 ---
 ## Changes
@@ -13,4 +18,4 @@ v0.2.0 / 2017-02-07
   * change `vue` and `vuex` to peer dependencies
 
 ## Fixed
-  * client-plugin set data to children compenent
+  * client-plugin set data to children component
