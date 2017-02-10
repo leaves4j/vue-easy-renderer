@@ -33,5 +33,5 @@
       }
     },
     components: {}
-  }
+  };
 </script>
