@@ -18,10 +18,10 @@
     head: {
       title: 'hello',
       script: [
-        {src: "/hello_world.js", async: true}
+        {src: '/hello_world.js', async: true}
       ],
       link: [
-        { rel: 'stylesheet', href: '/style/hello_world.css' },
+        {rel: 'stylesheet', href: '/style/hello_world.css'},
       ]
     },
     data() {
@@ -34,5 +34,5 @@
     methods: {},
     computed: {},
     components: {}
-  }
+  };
 </script>

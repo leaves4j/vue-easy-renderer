@@ -2,26 +2,16 @@
 
 const path = require('path');
 
-const Compiler = require('./lib/compiler');
-const Renderer = require('./lib/renderer');
+const rendererFactory = require('./lib/factory');
 
-function vueEasyRenderer(basePath, rendererConfig) {
-  const head = (rendererConfig && rendererConfig.head) || {};
-  const webpackConfig = (rendererConfig && rendererConfig.webpackConfig);
-  const streamFlag = !(rendererConfig && rendererConfig.stream);
-  const useStore = rendererConfig && rendererConfig.store;
-  const preCompile = (rendererConfig && rendererConfig.preCompile) || [];
-  const plugins = (rendererConfig && rendererConfig.plugins) || [];
+function vueEasyRenderer(basePath, options) {
+  const renderer = rendererFactory(basePath, options);
 
-  preCompile.forEach(filePath => compiler.compile(path.resolve(basePath, filePath)));
-
-  const compiler = new Compiler({webpackConfig, basePath: path.resolve(basePath)});
-  const renderer = new Renderer(compiler, {head, useStore, plugins});
   return (req, res, next) => {
     res.vueRender = (vueFilePath, context, config) => {
       res.set('Content-Type', 'text/html');
       const filePath = path.resolve(basePath, vueFilePath);
-      if (streamFlag) {
+      if (options.useStream) {
         renderer.renderToStream(filePath, context, config).then(stream => {
           stream.on('data', chunk => res.write(chunk));
           stream.on('end', () => res.end());

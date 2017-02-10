@@ -23,9 +23,9 @@
       }
     ],
     "no-undef": [
-      0,
+      2,
       {
-        "typeof": true
+        "typeof": false
       }
     ],
     "object-curly-spacing": [
