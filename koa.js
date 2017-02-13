@@ -10,8 +10,8 @@ function vueEasyRenderer(basePath, options) {
     ctx.vueRender = (vueFilePath, context, config) => {
       ctx.set('Content-Type', 'text/html');
       const filePath = path.resolve(basePath, vueFilePath);
-      const rendererFn = options.useStream ? renderer.renderToStream.bind(renderer) : renderer.renderToString.bind(renderer);
-      return rendererFn(filePath, context, config).then(result => {
+
+      return renderer.renderToStream(filePath, context, config).then(result => {
         ctx.body = result;
         return Promise.resolve();
       }).catch(e => {

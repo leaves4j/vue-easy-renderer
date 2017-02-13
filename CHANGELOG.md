@@ -1,3 +1,8 @@
+v0.4.0 / 2017-02-09
+---
+## Changes
+  * remove renderer options `streamFlag`
+
 v0.3.0 / 2017-02-09
 ---
 ## Changes
