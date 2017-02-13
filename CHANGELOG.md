@@ -1,4 +1,9 @@
-v0.4.0 / 2017-02-09
+v0.5.0 / 2017-02-13
+---
+## Changes
+  * and `sass` and `less` internal support
+
+v0.4.0 / 2017-02-13
 ---
 ## Changes
   * remove renderer options `streamFlag`

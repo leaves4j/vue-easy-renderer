@@ -147,7 +147,7 @@ const vueEasyRenderer = require('vue-easy-renderer').connectRenderer;
 | [options.plugins] | `Array` | vue plugins, e.g. `[vueRouter]` or `[{plugin: vueRouter,options: {}}]` |
 | [options.preCompile] | `Array` | pre-compile `*.vue` file list |
 | [options.head] | `Object` | common html head config see detail in [Component Head](#component-head) |
-| [options.webpackConfig] | `Object` | server-side compiler webpack config, default config use `vue-loader` with `css-loader` and `babel-loader` in `preset-es2015 preset-stage-2`|
+| [options.compilerConfig] | `Object` | server-side compiler webpack config, default config use `vue-loader` with `css-loader` and `babel-loader` in `preset-es2015 preset-stage-2`|
 
 
 ## Vue Client Plugin
