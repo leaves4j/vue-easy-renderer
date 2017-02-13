@@ -4,7 +4,7 @@ const path = require('path');
 const chai = require('chai');
 const Compiler = require('../../lib/compiler');
 const Renderer = require('../../lib/renderer');
-const mfs = require('../../lib/mfs');
+const cache = require('../../lib/cache');
 
 const expect = chai.expect;
 
@@ -17,11 +17,13 @@ describe('Renderer', () => {
     renderer.getVueInstance(filePath, {hello: 'world!'}).then(vueInstance => {
       expect(vueInstance).to.have.property('hello');
       expect(vueInstance.hello).to.equal('world!');
-      mfs.unlinkSync(filePath);
+      cache.storage.delete(filePath);
+      cache.mfs.unlinkSync(filePath);
       done();
     }).catch(e => {
       done(e);
-      mfs.unlinkSync(filePath);
+      cache.storage.delete(filePath);
+      cache.mfs.unlinkSync(filePath);
     });
   });
   it('Renderer.renderToString() should be ok', done => {
@@ -31,11 +33,13 @@ describe('Renderer', () => {
 
     renderer.renderToString(filePath, {hello: 'world!'}).then(string => {
       expect(string).to.contain('<div server-rendered="true" class="test" data-v-167df365>hello world!</div>');
-      mfs.unlinkSync(filePath);
+      cache.storage.delete(filePath);
+      cache.mfs.unlinkSync(filePath);
       done();
     }).catch(e => {
+      cache.storage.delete(filePath);
+      cache.mfs.unlinkSync(filePath);
       done(e);
-      mfs.unlinkSync(filePath);
     });
   });
   it('Renderer.renderToStream() should be ok', done => {
@@ -44,11 +48,13 @@ describe('Renderer', () => {
     const renderer = new Renderer(compiler);
 
     renderer.renderToStream(filePath, {hello: 'world!'}).then(stream => {
-      mfs.unlinkSync(filePath);
+      cache.storage.delete(filePath);
+      cache.mfs.unlinkSync(filePath);
       done();
     }).catch(e => {
+      cache.storage.delete(filePath);
+      cache.mfs.unlinkSync(filePath);
       done(e);
-      mfs.unlinkSync(filePath);
     });
   });
   it('Renderer should be ok with store', done => {
@@ -58,11 +64,11 @@ describe('Renderer', () => {
 
     renderer.renderToString(filePath, {world: 'world!'}).then(string => {
       expect(string).to.contain('<div server-rendered="true" class="test" data-v-483fa904>hello world!</div>');
-      mfs.unlinkSync(filePath);
+      cache.mfs.unlinkSync(filePath);
       done();
     }).catch(e => {
       done(e);
-      mfs.unlinkSync(filePath);
+      cache.mfs.unlinkSync(filePath);
     });
   });
 });
