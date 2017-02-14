@@ -7,7 +7,7 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "build": "cd client; webpack -p",
+    "build": "cd client; webpack",
     "test": "mocha test",
     "preversion": "npm test",
     "version": "npm run build && git add -A",
