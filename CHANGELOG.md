@@ -1,3 +1,8 @@
+v0.6.1 / 2017-02-14
+---
+## Fixed
+  * compiler bug when using plugins with string path 
+
 v0.6.0 / 2017-02-14
 ---
 ## Changes
