@@ -1,3 +1,8 @@
+v0.6.2 / 2017-02-14
+---
+## Fixed
+  * compiler bug when using plugins with string path and es6 `export default`
+
 v0.6.1 / 2017-02-14
 ---
 ## Fixed
