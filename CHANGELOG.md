@@ -1,3 +1,8 @@
+v0.6.0 / 2017-02-14
+---
+## Changes
+  * support using plugins with string path
+
 v0.5.0 / 2017-02-13
 ---
 ## Changes
