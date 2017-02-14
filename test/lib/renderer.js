@@ -2,6 +2,7 @@
 
 const path = require('path');
 const chai = require('chai');
+const {describe, it} = require('mocha');
 const Compiler = require('../../lib/compiler');
 const Renderer = require('../../lib/renderer');
 const cache = require('../../lib/cache');

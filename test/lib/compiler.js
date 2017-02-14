@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const {describe, it} = require('mocha');
 const Compiler = require('../../lib/compiler');
 const cache = require('../../lib/cache');
 
