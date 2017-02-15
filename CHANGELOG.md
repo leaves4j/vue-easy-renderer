@@ -1,3 +1,9 @@
+v0.6.4 / 2017-02-15
+---
+## Fixed
+  * sass and less support bug
+  * client init state to vue options data bug
+
 v0.6.3 / 2017-02-14
 ---
 ## Fixed
