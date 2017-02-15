@@ -30,12 +30,13 @@ vueEasyRenderer.install = (Vue, options) => {
     beforeCreate() {
       if (this.$isServer || this.$parent) return;
       const initState = window.__VUE_INITIAL_STATE__;
-      const data = typeof this.$options.data === 'function' ?
-        this.$options.data.call(this) :
-        this.$options.data || {};
-      this.$options.data = Object.assign(data, initState || {});
       if (this.$options.store && initState) {
         this.$options.store.replaceState(initState);
+      } else {
+        const data = typeof this.$options.data === 'function' ?
+          this.$options.data.call(this) :
+          this.$options.data || {};
+        this.$options.data = Object.assign(data, initState || {});
       }
     }
   });
