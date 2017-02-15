@@ -105,10 +105,11 @@ vueEasyRenderer.install = function (Vue, options) {
     beforeCreate: function beforeCreate() {
       if (this.$isServer || this.$parent) return;
       var initState = window.__VUE_INITIAL_STATE__;
-      var data = typeof this.$options.data === 'function' ? this.$options.data.call(this) : this.$options.data || {};
-      this.$options.data = Object.assign(data, initState || {});
       if (this.$options.store && initState) {
         this.$options.store.replaceState(initState);
+      } else {
+        var data = typeof this.$options.data === 'function' ? this.$options.data.call(this) : this.$options.data || {};
+        this.$options.data = Object.assign(data, initState || {});
       }
     }
   });
