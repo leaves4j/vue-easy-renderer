@@ -4,6 +4,7 @@ const path = require('path');
 const rendererFactory = require('./lib/factory');
 
 function vueEasyRenderer(basePath, options) {
+  const errorHandler = e => console.error(e) || options.onError;
   const renderer = rendererFactory(basePath, options);
 
   return (ctx, next) => {
@@ -15,7 +16,7 @@ function vueEasyRenderer(basePath, options) {
         ctx.body = result;
         return Promise.resolve();
       }).catch(e => {
-        console.error('vueRenderError', e);
+        errorHandler(e);
         return Promise.resolve();
       });
     };

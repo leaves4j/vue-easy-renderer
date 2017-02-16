@@ -5,6 +5,7 @@ const path = require('path');
 const rendererFactory = require('./lib/factory');
 
 function vueEasyRenderer(basePath, options) {
+  const errorHandler = e => console.error(e) || options.onError;
   const renderer = rendererFactory(basePath, options);
 
   return (req, res, next) => {
@@ -15,9 +16,7 @@ function vueEasyRenderer(basePath, options) {
       renderer.renderToStream(filePath, context, config).then(stream => {
         stream.on('data', chunk => res.write(chunk));
         stream.on('end', () => res.end());
-      }).catch(e => {
-        console.error('vueRenderError', e);
-      });
+      }).catch(errorHandler);
     };
     res.vueRenderToStream = (vueFilePath, context, config) => {
       const filePath = path.resolve(basePath, vueFilePath);

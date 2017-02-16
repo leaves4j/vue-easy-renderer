@@ -1,3 +1,8 @@
+v0.7.0 / 2017-02-16
+---
+## Changes
+  * add renderer options `onError`
+
 v0.6.4 / 2017-02-15
 ---
 ## Fixed
