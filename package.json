@@ -1,6 +1,6 @@
 {
   "name": "vue-easy-renderer",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Vue.js 2.0 server-side renderer for *.vue file with Node.js.",
   "main": "index.js",
   "engines": {
