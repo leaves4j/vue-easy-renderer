@@ -1,7 +1,7 @@
 v0.7.1 / 2017-02-17
 ---
 ## Changes
-  * remove `css-loader` `sass-loader` `less-loader`, use `null-loader` to deal with style
+  * remove `css-loader` `sass-loader` `less-loader`, use `null-loader` to deal style
 
 v0.7.0 / 2017-02-16
 ---
