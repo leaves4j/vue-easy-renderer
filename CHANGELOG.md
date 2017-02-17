@@ -1,6 +1,11 @@
-v0.7.0 / 2017-02-16
+v0.7.1 / 2017-02-17
 ---
 ## Changes
+  * remove `css-loader` `sass-loader` `less-loader`, use `null-loader` to deal with style
+
+v0.7.0 / 2017-02-16
+---
+## New Features
   * add renderer options `onError`
 
 v0.6.4 / 2017-02-15
@@ -26,22 +31,22 @@ v0.6.1 / 2017-02-14
 
 v0.6.0 / 2017-02-14
 ---
-## Changes
+## New Features
   * support using plugins with string path
 
 v0.5.0 / 2017-02-13
 ---
-## Changes
+## New Features
   * and `sass` and `less` internal support
 
 v0.4.0 / 2017-02-13
 ---
-## Changes
+## Breaking Change
   * remove renderer options `streamFlag`
 
 v0.3.0 / 2017-02-09
 ---
-## Changes
+## New Features
   * add vue plugin support
  
 v0.2.1 / 2017-02-07
@@ -54,8 +59,10 @@ v0.2.1 / 2017-02-07
 
 v0.2.0 / 2017-02-07
 ---
-## Changes
+## New Features
   * add `vuex` store support
+
+## Changes
   * change `vue` and `vuex` to peer dependencies
 
 ## Fixed

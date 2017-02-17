@@ -12,7 +12,13 @@ This package offers Node.js server-side rendering for Vue 2.0, Base on `vue-serv
 ## Installation
 
 ```bash
-npm install vue-easy-renderer vue vuex vue-loader -S
+npm install vue-easy-renderer -S
+```
+
+Peer Dependency
+
+```bash
+npm i vue vuex vue-loader -S
 ```
 
 ## Example
