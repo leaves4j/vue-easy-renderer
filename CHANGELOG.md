@@ -1,3 +1,8 @@
+v0.8.0 / 2017-02-20
+---
+## New Features
+  * add renderer options `watch`
+
 v0.7.1 / 2017-02-17
 ---
 ## Changes

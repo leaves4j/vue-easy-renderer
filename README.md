@@ -25,7 +25,7 @@ npm i vue vuex vue-loader -S
 
 ### Vue File
 
-Create the vue file in `componet/hello_word/hello_word.vue`
+Create the vue file in `component/hello_word/hello_word.vue`
 
 ```html
 <template>
@@ -149,6 +149,7 @@ const vueEasyRenderer = require('vue-easy-renderer').connectRenderer;
 | --- | --- | --- |
 | basePath | `string` | `*.vue` file base path |
 | [options] | `Object` | renderer options |
+| [options.watch] | `Boolean` | default `false`, watch the '*.vue' file changes |
 | [options.store] | `string` | enum `'on'` `'off'` `'auto'`, default `'auto'`. when is 'on', renderer use vuex store, when 'auto', renderer will check the vue options, then renderer set data to vuex or vue data depend on vue options 'store' property|
 | [options.plugins] | `Array` \| `string` | vue plugins, e.g. `[vueRouter]` or `[{plugin: vueRouter,options: {}}]`, it also support using plugin path string, e.g. `[path.resolve('../app/resource.js')]` |
 | [options.preCompile] | `Array` | pre-compile `*.vue` file list |

@@ -25,4 +25,23 @@ describe('Compiler', () => {
       cache.mfs.unlinkSync(filePath);
     });
   });
+  it('Compiler.constructor() should be ok with options.watch', done => {
+    const filePath = path.resolve(__dirname, '../vue_file/simple.vue');
+    const compiler = new Compiler({watch: true});
+    compiler.compile(filePath).then(() => {
+      const file = cache.mfs.readFileSync(filePath);
+      if (file) {
+        done();
+      } else {
+        done('compiler file write fail');
+      }
+
+      cache.storage.delete(filePath);
+      cache.mfs.unlinkSync(filePath);
+    }).catch(e => {
+      done(e);
+      cache.storage.delete(filePath);
+      cache.mfs.unlinkSync(filePath);
+    });
+  });
 });
