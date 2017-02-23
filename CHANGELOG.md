@@ -1,3 +1,8 @@
+v0.8.1 / 2017-02-23
+---
+## Fixed
+  * renderer with vuex bug
+
 v0.8.0 / 2017-02-20
 ---
 ## New Features
