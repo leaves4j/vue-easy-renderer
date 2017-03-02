@@ -1,3 +1,8 @@
+v0.8.2 / 2017-03-02
+---
+## Fixed
+  * state data doesn't work well when not in server render data bug
+
 v0.8.1 / 2017-02-23
 ---
 ## Fixed
