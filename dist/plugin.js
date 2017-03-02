@@ -104,9 +104,10 @@ vueEasyRenderer.install = function (Vue, options) {
   Vue.mixin({
     beforeCreate: function beforeCreate() {
       if (this.$isServer || this.$parent) return;
+      /*global window*/
       var initState = window.__VUE_INITIAL_STATE__;
       if (this.$options.store && initState) {
-        this.$options.store.replaceState(initState);
+        this.$options.store.replaceState(Object.assign(this.$options.store.state, initState));
       } else {
         var data = typeof this.$options.data === 'function' ? this.$options.data.call(this) : this.$options.data || {};
         this.$options.data = Object.assign(data, initState || {});
