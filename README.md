@@ -208,20 +208,18 @@ We can set head in component
 Then the result
 
 ```html
-<html data-vue-meta-server-rendered data-vue-meta="">
+<html>
 <head>
- <title data-vue-meta="true">hello</title>
- <link data-vue-meta="true" rel="stylesheet" href="/style/hello_world.css"/>
+ <title>hello</title>
+ <link rel="stylesheet" href="/style/hello_world.css"/>
  <script>window.__VUE_INITIAL_STATE__ = {"world":"world!"};</script>
- <script data-vue-meta="true" src="/hello_world.js" async="true"></script>
+ <script src="/hello_world.js" async="true"></script>
 </head>
-<body data-vue-meta="">
+<body>
   <div id="app" server-rendered="true" class="hello" data-v-035d6643>hello world!</div>
 </body>
 </html>
 ```
-
-`vue-easy-render` uses [vue-meta](https://github.com/declandewet/vue-meta) to update the headers and html attributes of your application. You can take a look at [vue-meta documentation](https://github.com/declandewet/vue-meta) for the list of options you can give to head.
 
 
 

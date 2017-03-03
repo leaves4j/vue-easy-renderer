@@ -1,3 +1,8 @@
+v0.9.0 / 2017-03-03
+---
+## Breaking Change
+  * remove vue-meta, but option head still work in server side render
+
 v0.8.2 / 2017-03-02
 ---
 ## Fixed

@@ -1,7 +1,5 @@
 'use strict';
 
-const meta = require('vue-meta');
-
 if (typeof Object.assign !== 'function') {
   Object.assign = target => {
     if (target == null) {
@@ -25,7 +23,6 @@ if (typeof Object.assign !== 'function') {
 
 const vueEasyRenderer = {};
 vueEasyRenderer.install = (Vue, options) => {
-  Vue.use(meta, {keyName: 'head'});
   Vue.mixin({
     beforeCreate() {
       if (this.$isServer || this.$parent) return;
