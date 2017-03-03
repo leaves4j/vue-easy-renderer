@@ -1,3 +1,8 @@
+v0.9.1/ 2017-03-03
+---
+## Fixed
+  * html error character bug
+
 v0.9.0 / 2017-03-03
 ---
 ## Breaking Change
