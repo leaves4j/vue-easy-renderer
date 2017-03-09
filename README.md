@@ -53,7 +53,7 @@ Create the vue file in `component/hello_word/hello_word.vue`
 const path = require('path');
 const Koa = require('koa');
 const serve = require('koa-static');
-const vueEasyRenderer = require('vue-easy-renderer').kaoRenderer;
+const vueEasyRenderer = require('vue-easy-renderer').koaRenderer;
 
 const renderer = vueEasyRenderer(path.resolve(__dirname, './component'));
 const app = new Koa();
