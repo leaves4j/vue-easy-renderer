@@ -1,3 +1,8 @@
+v0.9.2/ 2017-03-29
+---
+## Fixed
+  * add `regeneratorRuntime` for `async/await`
+
 v0.9.1/ 2017-03-03
 ---
 ## Fixed
