@@ -56,6 +56,7 @@
     "vue-loader": ">=9.4.0"
   },
   "devDependencies": {
+    "babel-plugin-transform-object-assign": "^6.22.0",
     "chai": "^3.5.0",
     "eslint": "^3.13.1",
     "eslint-config-airbnb": "^14.0.0",

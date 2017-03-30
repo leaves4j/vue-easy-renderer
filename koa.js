@@ -3,9 +3,15 @@
 const path = require('path');
 const rendererFactory = require('./lib/factory');
 
+const noop = () => {};
+
 function vueEasyRenderer(basePath, options) {
-  const errorHandler = e => console.error(e) || options.onError;
+  const errorHandler = options.onError || (e => console.error(e)); //eslint-disable-line no-console
+  const readyHandler = options.onReady || noop;
+
   const renderer = rendererFactory(basePath, options);
+  renderer.on('error', errorHandler);
+  renderer.on('ready', readyHandler);
 
   return (ctx, next) => {
     ctx.vueRender = (vueFilePath, context, config) => {

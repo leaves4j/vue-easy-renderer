@@ -74,40 +74,19 @@ module.exports =
 "use strict";
 
 
-var _arguments = arguments;
-if (typeof Object.assign !== 'function') {
-  Object.assign = function (target) {
-    if (target == null) {
-      throw new TypeError('Object.assign() Cannot convert undefined or null to object');
-    }
-
-    target = Object(target);
-    for (var index = 1; index < _arguments.length; index++) {
-      var source = _arguments[index];
-      if (source != null) {
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-    }
-    return target;
-  };
-}
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var vueEasyRenderer = {};
 vueEasyRenderer.install = function (Vue, options) {
   Vue.mixin({
     beforeCreate: function beforeCreate() {
       if (this.$isServer || this.$parent) return;
-      /*global window*/
-      var initState = window.__VUE_INITIAL_STATE__;
+      var initState = window.__VUE_INITIAL_STATE__; //eslint-disable-line 
       if (this.$options.store && initState) {
-        this.$options.store.replaceState(Object.assign(this.$options.store.state, initState));
+        this.$options.store.replaceState(_extends(this.$options.store.state, initState));
       } else {
         var data = typeof this.$options.data === 'function' ? this.$options.data.call(this) : this.$options.data || {};
-        this.$options.data = Object.assign(data, initState || {});
+        this.$options.data = _extends(data, initState || {});
       }
     }
   });

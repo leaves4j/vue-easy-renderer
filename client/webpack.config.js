@@ -1,6 +1,5 @@
 'use strict';
 
-const webpack = require('webpack');
 const path = require('path');
 
 const webpack_config = {
@@ -18,7 +17,8 @@ const webpack_config = {
         test: /\.js$/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015', 'stage-2']
+          presets: ['es2015', 'stage-2'],
+          plugins: ['transform-object-assign']
         },
         exclude: /node_modules/
       },

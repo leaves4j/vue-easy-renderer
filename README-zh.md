@@ -1,8 +1,6 @@
 vue-easy-renderer
 ---
-`vue-easy-renderer` is a server-side rendering framework based on `vue-server-renderer`, which provides a simpler way to implement vue server rendering, including `Koa.js` and `Express.js` plugin.
-
-[中文说明](https://github.com/leaves4j/vue-easy-renderer/blob/master/README.md)
+`vue-easy-renderer` 是一个基于 `vue-server-renderer` 的服务端渲染工具, 他提供了更简单的方式来实现vue的服务端渲染， 包括 `Koa.js` 和 `Express.js` 的插件.
 
 + [Installation](#installation)
 + [Example](#example)
@@ -121,20 +119,19 @@ Detail in [Full example](https://github.com/leaves4j/vue-easy-renderer/tree/mast
 
 ### vueRender(path,data,config)
 
-Use `ctx.vueRender()` in koa.js or `res.vueRender()` in express
+在 `koa.js` 中 `vueRender`挂载在`ctx`上，即 `ctx.vueRender()`，在`express.js`中挂载在`res`上，即 `res.vueRender()`
 
-| Param | Type | Description |
+| 参数 | 类型 | 描述 |
 | --- | --- | --- |
-| path | `String` | `*.vue` file path base on [`Options.basePath`](#renderer-options)  |
-| data | `Object` | render data, will be merged into vue instance `data`|
-| [config] | `Object` | renderer config |
-| [config.pure] | `Boolean` | default `false`, `pure:true` will  render `*.vue` file without head and tail
-
-## Renderer Options
+| path | `String` | `*.vue` 基于 [`Options.basePath`](#renderer-options) 的路径  |
+| data | `Object` | 渲染数据，将会被合并到vue实例的data中或者vuex的state中|
+| [config] | `Object` | 渲染选项 |
+| [config.pure] | `Boolean` | 默认 `false`, 当设置为`pure:true`时，将会只渲染vue文件的html,不包含头尾|
+## Renderer 选项
 
 ### vueEasyRenderer(basePath,options)
 
-**get vueEasyRenderer**
+**获取 vueEasyRenderer**
 
 With `Koa.js 2`
 
@@ -148,26 +145,26 @@ With `Express.js`
 const vueEasyRenderer = require('vue-easy-renderer').connectRenderer;
 ```
 
-**Params:**
+**参数:**
 
-| Param | Type | Description |
+| 参数 | 类型 | 描述 |
 | --- | --- | --- |
-| basePath | `string` | `*.vue` file base path |
-| [options] | `Object` | renderer options |
-| [options.watch] | `Boolean` | default `false`, watch the '*.vue' file changes |
-| [options.store] | `string` | enum `'on'` `'off'` `'auto'`, default `'auto'`. when is 'on', renderer use vuex store, when 'auto', renderer will check the vue options, then renderer set data to vuex or vue data depend on vue options 'store' property|
-| [options.plugins] | `Array` \| `string` | vue plugins, e.g. `[vueRouter]` or `[{plugin: vueRouter,options: {}}]`, it also support using plugin path string, e.g. `[path.resolve('../app/resource.js')]` |
-| [options.preCompile] | `Array` | pre-compile `*.vue` file list |
-| [options.head] | `Object` | common html head config see detail in [Component Head](#component-head) |
-| [options.compilerConfig] | `Object` | server-side compiler webpack config, default config use `vue-loader` with `css-loader` and `babel-loader`|
-| [options.onError] | `Function` | error handler|
-| [options.onReady] | `Function` | ready event handler, renderer will emit an event when completed the work of initialization|
-| [options.global] | `Object` | global variables, these variables will be injected into context of the vue rendering sandbox, just like global.xx in node or window.xx in browser|
+| basePath | `string` | `*.vue` 文件路径 |
+| [options] | `Object` | renderer 的 options |
+| [options.watch] | `Boolean` | 默认值 `false`, 是否监控 '*.vue' 的变更, 当process.env.NODE_ENV|
+| [options.store] | `string` | 枚举 `'on'` `'off'` `'auto'`, 默认为 `'auto'`. 当设置为`on`的时候，会将数据渲染到vuex的state中；如果为`off`，将会渲染到vue实例的data中，如果为`auto`，会自动检查vue是否使用了vuex，如果使用了vuex就回渲染到state中，否则渲染到data中|
+| [options.plugins] | `Array` \| `string` | vue插件, 如 `[vueRouter]` 或者 `[{plugin: vueRouter,options: {}}]`, 同时也支持字符串，如： `[path.resolve('../app/resource.js')]` |
+| [options.preCompile] | `Array` | 需要预编译的 `*.vue` 文件路径列表，如：`['test.vue']` |
+| [options.head] | `Object` | 通用的html头部设置， 详情见 [Component Head](#component-head) |
+| [options.compilerConfig] | `Object` | 服务端vue文件的编译器配置，为webpack配置文件，默认配置使用 `vue-loader` 、 `css-loader` 、 `babel-loader`|
+| [options.onError] | `Function` | 异常处理方法|
+| [options.onReady] | `Function` | ready 时间处理方法, renderer 将会在完成初始化工作之后emit一个ready事件|
+| [options.global] | `Object` | 全局变量, 这些全局变量将会被注入的vue服务端渲染时的sandbox的作用域，相当于node中的global.xx，浏览器中的window.xx|
 
 
 ## Vue Client Plugin
 
-We can set the render data to vue instance `data` with the client plugin 
+服务端渲染完成后，我们需要把数据注入到浏览器中vue/vuex实例中，需要借助于客户端的插件
 
 Base usage
 
@@ -183,7 +180,7 @@ app.$mount('#app');
 
 ## Component Head
 
-We can set head in component
+我们可以在组件中设置html的头部
 
 ```html
 <template>
