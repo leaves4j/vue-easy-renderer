@@ -2,7 +2,7 @@ vue-easy-renderer
 ---
 `vue-easy-renderer` is a server-side rendering framework based on `vue-server-renderer`, which provides a simpler way to implement vue server rendering, including `Koa.js` and `Express.js` plugin.
 
-[中文说明](https://github.com/leaves4j/vue-easy-renderer/blob/master/README.md)
+[中文说明](https://github.com/leaves4j/vue-easy-renderer/blob/master/README-zh.md)
 
 + [Installation](#installation)
 + [Example](#example)
