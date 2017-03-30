@@ -26,7 +26,7 @@ npm i vue vuex vue-loader -S
 
 ### Vue File
 
-Create the vue file in `component/hello_word/hello_word.vue`
+创建一个文件 `component/hello_word/hello_word.vue`
 
 ```html
 <template>
@@ -101,7 +101,8 @@ module.exports = app;
 ```
 
 ### Result
-The browser get the html:
+
+最后浏览器获取到的html
 
 ```html
 <html>
