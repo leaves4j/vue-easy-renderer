@@ -44,4 +44,23 @@ describe('Compiler', () => {
       cache.mfs.unlinkSync(filePath);
     });
   });
+  it('Compiler.compile() should be ok with es6/es7', done => {
+    const filePath = path.resolve(__dirname, '../vue_file/simple_es_next.vue');
+    const compiler = new Compiler({watch: true});
+    compiler.compile(filePath).then(() => {
+      const file = cache.mfs.readFileSync(filePath);
+      if (file) {
+        done();
+      } else {
+        done('compiler file write fail');
+      }
+
+      cache.storage.delete(filePath);
+      cache.mfs.unlinkSync(filePath);
+    }).catch(e => {
+      done(e);
+      cache.storage.delete(filePath);
+      cache.mfs.unlinkSync(filePath);
+    });
+  });
 });

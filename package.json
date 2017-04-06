@@ -41,6 +41,7 @@
   "dependencies": {
     "babel-core": "^6.22.0",
     "babel-loader": "^6.2.10",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.2.2",
     "babel-regenerator-runtime": "^6.5.0",
     "memory-fs": "^0.4.1",

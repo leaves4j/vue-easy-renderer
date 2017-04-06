@@ -1,3 +1,9 @@
+v0.10.2 / 2017-04-06
+---
+### Fixed
+  * add `transform-object-rest-spread` for object rest spread
+
+
 v0.10.1 / 2017-04-06
 ---
 ### Changes
