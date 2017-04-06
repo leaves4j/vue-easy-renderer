@@ -21,7 +21,7 @@ npm install vue-easy-renderer -S
 Peer Dependency
 
 ```bash
-npm i vue vuex vue-loader -S
+npm i vue vuex vue-loader vue-server-renderer -S
 ```
 
 ## Example
