@@ -139,7 +139,7 @@ Use `ctx.vueRender()` in koa.js or `res.vueRender()` in express
 With `Koa.js 2`
 
 ```js
-const vueEasyRenderer = require('vue-easy-renderer').kaoRenderer;
+const vueEasyRenderer = require('vue-easy-renderer').koaRenderer;
 ```
 
 With `Express.js`

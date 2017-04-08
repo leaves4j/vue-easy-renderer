@@ -137,7 +137,7 @@ Detail in [Full example](https://github.com/leaves4j/vue-easy-renderer/tree/mast
 With `Koa.js 2`
 
 ```js
-const vueEasyRenderer = require('vue-easy-renderer').kaoRenderer;
+const vueEasyRenderer = require('vue-easy-renderer').koaRenderer;
 ```
 
 With `Express.js`
