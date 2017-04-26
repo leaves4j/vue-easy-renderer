@@ -1,3 +1,8 @@
+v0.10.3 / 2017-04-26
+---
+### Fixed
+  * add vue error handler
+
 v0.10.2 / 2017-04-06
 ---
 ### Fixed
