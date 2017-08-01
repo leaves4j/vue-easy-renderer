@@ -7,8 +7,10 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "build": "cd client; webpack",
-    "test": "mocha test",
+    "pretest": "npm run build",
+    "check": "flow check",
+    "build": "npm run check && rm -rf lib/* && flow-remove-types src/ -d lib/ --pretty && rm -f lib/type.js",
+    "test": "nyc ava",
     "preversion": "npm test",
     "version": "npm run build && git add -A",
     "postversion": "git push && git push --tags"
@@ -39,8 +41,8 @@
     "renderer"
   ],
   "dependencies": {
-    "babel-core": "^6.22.0",
-    "babel-loader": "^6.2.10",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.2.2",
     "babel-regenerator-runtime": "^6.5.0",
@@ -48,23 +50,37 @@
     "node-version": "^1.0.0",
     "null-loader": "^0.1.1",
     "serialize-javascript": "^1.3.0",
-    "webpack": "^2.2.0"
+    "webpack": "^3.4.1",
+    "webpack-node-externals": "^1.6.0"
   },
   "peerDependencies": {
     "vue": ">=2.0.0",
     "vuex": ">=2.0.0",
+    "vue-router": ">=2.4.0",
     "vue-loader": ">=9.4.0",
     "vue-server-renderer": ">=2.0.0"
   },
   "devDependencies": {
+    "ava": "^0.21.0",
+    "babel-eslint": "^7.2.3",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "chai": "^3.5.0",
-    "eslint": "^3.13.1",
-    "eslint-config-airbnb": "^14.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.2",
-    "eslint-plugin-vue": "^2.0.0",
+    "css-loader": "^0.28.4",
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-flowtype": "^2.34.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-vue": "^2.1.0",
+    "flow-bin": "^0.51.0",
+    "flow-remove-types": "^1.2.1",
     "mocha": "^3.2.0",
-    "vue-style-loader": "^1.0.0"
+    "nyc": "^11.0.3",
+    "vue": "^2.4.2",
+    "vue-loader": "^13.0.2",
+    "vue-router": "^2.7.0",
+    "vue-server-renderer": "^2.4.2",
+    "vue-style-loader": "^1.0.0",
+    "vue-template-compiler": "^2.4.2",
+    "vuex": "^2.3.1"
   }
 }
