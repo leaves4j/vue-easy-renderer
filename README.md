@@ -21,7 +21,7 @@ npm install vue-easy-renderer -S
 Peer Dependency
 
 ```bash
-npm i vue vuex vue-loader vue-server-renderer -S
+npm i vue vuex vue-router vue-loader vue-server-renderer -S
 ```
 
 ## Example
@@ -155,7 +155,6 @@ const vueEasyRenderer = require('vue-easy-renderer').connectRenderer;
 | basePath | `string` | `*.vue` file base path |
 | [options] | `Object` | renderer options |
 | [options.watch] | `Boolean` | default `false`, watch the '*.vue' file changes |
-| [options.store] | `string` | enum `'on'` `'off'` `'auto'`, default `'auto'`. when is 'on', renderer use vuex store, when 'auto', renderer will check the vue options, then renderer set data to vuex or vue data depend on vue options 'store' property|
 | [options.plugins] | `Array` \| `string` | vue plugins, e.g. `[vueRouter]` or `[{plugin: vueRouter,options: {}}]`, it also support using plugin path string, e.g. `[path.resolve('../app/resource.js')]` |
 | [options.preCompile] | `Array` | pre-compile `*.vue` file list |
 | [options.head] | `Object` | common html head config see detail in [Component Head](#component-head) |
@@ -173,7 +172,7 @@ Base usage
 
 ```js
 import Vue from 'vue';
-import vueEasyRenderer from 'vue-easy-renderer/dist/plugin';
+import vueEasyRenderer from 'vue-easy-renderer/lib/plugins/client';
 import App from './app.vue';
 
 Vue.use(vueEasyRenderer);

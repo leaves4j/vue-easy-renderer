@@ -8,6 +8,7 @@ const SSRServerPlugin = {
       beforeCreate(): void {
         if (this.$parent) return;
         const context = this.$options.$context;
+        if (!context) return;
         Object.keys(this.$options).forEach((key) => {
           if (typeof this.$options[key].$ssrInstance === 'function') {
             this.$options[key] = this.$options[key].$ssrInstance();

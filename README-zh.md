@@ -19,7 +19,7 @@ npm install vue-easy-renderer -S
 Peer Dependency
 
 ```bash
-npm i vue vuex vue-loader vue-server-renderer -S
+npm i vue vuex vue-router vue-loader vue-server-renderer -S
 ```
 
 ## Example
@@ -153,7 +153,6 @@ const vueEasyRenderer = require('vue-easy-renderer').connectRenderer;
 | basePath | `string` | `*.vue` 文件路径 |
 | [options] | `Object` | renderer 的 options |
 | [options.watch] | `Boolean` | 默认值 `false`, 是否监控 '*.vue' 的变更, 当process.env.NODE_ENV|
-| [options.store] | `string` | 枚举 `'on'` `'off'` `'auto'`, 默认为 `'auto'`. 当设置为`on`的时候，会将数据渲染到vuex的state中；如果为`off`，将会渲染到vue实例的data中，如果为`auto`，会自动检查vue是否使用了vuex，如果使用了vuex就回渲染到state中，否则渲染到data中|
 | [options.plugins] | `Array` \| `string` | vue插件, 如 `[vueRouter]` 或者 `[{plugin: vueRouter,options: {}}]`, 同时也支持字符串，如： `[path.resolve('../app/resource.js')]` |
 | [options.preCompile] | `Array` | 需要预编译的 `*.vue` 文件路径列表，如：`['test.vue']` |
 | [options.head] | `Object` | 通用的html头部设置， 详情见 [Component Head](#component-head) |
@@ -171,7 +170,7 @@ Base usage
 
 ```js
 import Vue from 'vue';
-import vueEasyRenderer from 'vue-easy-renderer/dist/plugin';
+import vueEasyRenderer from 'vue-easy-renderer/lib/plugins/client';
 import App from './app.vue';
 
 Vue.use(vueEasyRenderer);

@@ -56,7 +56,9 @@ class Renderer extends EventEmitter implements IRenderer {
       }
     });
     this.options.preCompile.push(...needCompiledPlugin);
-    this.compiler.load(this.options.preCompile).then(() => this.emit('ready')).catch(e => this.emit('error', e));
+    this.compiler.load(this.options.preCompile).then(() => {
+      this.emit('ready');
+    }).catch(e => this.emit('error', e));
   }
 
   /**

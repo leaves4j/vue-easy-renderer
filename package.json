@@ -9,9 +9,9 @@
   "scripts": {
     "pretest": "npm run build",
     "check": "flow check",
-    "build:client":"babel src/plugins/client.js --out-file lib/plugins/client.js --presets=es2015 --plugins=transform-object-assign && mkdir dist; cp lib/plugins/client.js dist/plugin.js",
+    "build:client": "babel src/plugins/client.js --out-file lib/plugins/client.js --presets=es2015 --plugins=transform-object-assign && mkdir dist; cp lib/plugins/client.js dist/plugin.js",
     "build:server": "npm run check && rm -rf lib/* && flow-remove-types src/ -d lib/ --pretty && rm -f lib/type.js",
-    "build":"npm run build:client & npm run build:server",
+    "build": "npm run build:client & npm run build:server",
     "test": "nyc ava",
     "preversion": "npm test",
     "version": "npm run build && git add -A",

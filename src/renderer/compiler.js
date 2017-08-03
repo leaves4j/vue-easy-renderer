@@ -19,11 +19,11 @@ class Compiler implements ICompiler {
   basePath: string;
   watch: boolean;
   contextGlobal: ?Object;
-  constructor(fs: FileSystem, options: CompilerOptions) {
+  constructor(fs: FileSystem, options?: CompilerOptions) {
     this.fs = fs;
-    this.basePath = options.basePath;
-    this.watch = options.watch;
-    this.contextGlobal = options.global;
+    this.basePath = options ? options.basePath : __dirname;
+    this.watch = options ? options.watch : false;
+    this.contextGlobal = options ? options.global : Object.create(null);
   }
   /**
    * dynamic import
@@ -43,9 +43,9 @@ class Compiler implements ICompiler {
       return new Promise((resolve, reject) => compilingWaitingQueue.push({ resolve, reject }));
     }
 
-    this.load([request]);
-    return new Promise((resolve, reject) =>
+    const resultPromise = new Promise((resolve, reject) =>
       compilingWaitingQueueMap.set(request, [{ resolve, reject }]));
+    return this.load([request]).then(() => resultPromise);
   }
 
   /**
@@ -65,13 +65,12 @@ class Compiler implements ICompiler {
     serverCompiler.outputFileSystem = this.fs;
     const runner = this.watch ? cb => serverCompiler.watch({}, cb) : cb => serverCompiler.run(cb);
     return new Promise((resolve, reject) => {
-      console.time('compile');
       runner((error, stats) => {
         if (error) {
           reject(error);
           return;
         }
-        console.timeEnd('compile');
+
         const info = stats.toJson();
         if (stats.hasErrors()) {
           reject(info.errors);
@@ -90,6 +89,7 @@ class Compiler implements ICompiler {
    * @memberof Compiler
    */
   load(filePaths: Array<string>): Promise<void> {
+    if (filePaths.length === 0) return Promise.resolve();
     filePaths.forEach((filePath) => {
       if (!compilingWaitingQueueMap.has(filePath)) {
         compilingWaitingQueueMap.set(filePath, []);
@@ -202,7 +202,6 @@ class Compiler implements ICompiler {
       ],
     };
     config.entry = entry;
-
     return config;
   }
   /**
