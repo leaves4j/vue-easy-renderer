@@ -146,7 +146,7 @@ class Renderer extends EventEmitter implements IRenderer {
 
       const head = component.$options.head;
       const mergedHead = VueHead.headMerge(head, this.options.head);
-      const template = Renderer.getTemplateHtml(mergedHead, context, this.options.global);
+      const template = Renderer.getTemplateHtml(mergedHead, context.state, this.options.global);
       const transform = new StreamTransform(template.head, template.tail);
       return bodyStream.pipe(transform);
     });
@@ -170,7 +170,7 @@ class Renderer extends EventEmitter implements IRenderer {
 
         const head = component.$options.head;
         const mergedHead = VueHead.headMerge(head, this.options.head);
-        const indexHtml = Renderer.getTemplateHtml(mergedHead, context, this.options.global);
+        const indexHtml = Renderer.getTemplateHtml(mergedHead, context.state, this.options.global);
         const html = `${indexHtml.head}${result}${indexHtml.tail}`;
         resolve(html);
       });
