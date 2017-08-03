@@ -39,7 +39,7 @@ class RenderStreamTransform extends stream.Transform {
    * @memberOf RenderStreamTransform
    */
   _transform(chunk: string | Buffer, encoding: string, callback: Function): void {
-    if (this.fistFlag) {
+    if (this.firstFlag) {
       this.push(new Buffer(this.head));
       this.firstFlag = false;
     }
