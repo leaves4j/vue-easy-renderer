@@ -8,3 +8,4 @@ example/express/node_modules/
 example/koa/node_modules/
 lib_back/
 lib/
+dist/
