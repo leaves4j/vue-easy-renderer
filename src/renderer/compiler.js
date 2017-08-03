@@ -1,6 +1,6 @@
 // @flow
 import typeof FileSystem from 'fs';
-import type { ICompiler } from '../type';
+import type { ICompiler, CompilerOptions } from '../type';
 
 const path = require('path');
 const vm = require('vm');
@@ -19,7 +19,7 @@ class Compiler implements ICompiler {
   basePath: string;
   watch: boolean;
   contextGlobal: ?Object;
-  constructor(fs: FileSystem, options: Object) {
+  constructor(fs: FileSystem, options: CompilerOptions) {
     this.fs = fs;
     this.basePath = options.basePath;
     this.watch = options.watch;

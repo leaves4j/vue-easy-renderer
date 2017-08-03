@@ -1,4 +1,4 @@
-'use strict';
+
 
 const vueEasyRenderer = {};
 vueEasyRenderer.install = (Vue, options) => {
@@ -7,14 +7,14 @@ vueEasyRenderer.install = (Vue, options) => {
       if (this.$isServer || this.$parent) return;
       const initState = window.__VUE_INITIAL_STATE__; //eslint-disable-line 
       if (this.$options.store && initState) {
-        this.$options.store.replaceState(Object.assign(this.$options.store.state, initState));
+        this.$options.store.replaceState(Object.assign({}, this.$options.store.state, initState));
       } else {
         const data = typeof this.$options.data === 'function' ?
           this.$options.data.call(this) :
           this.$options.data || {};
-        this.$options.data = Object.assign(data, initState || {});
+        this.$options.data = Object.assign({}, data, initState);
       }
-    }
+    },
   });
 };
 

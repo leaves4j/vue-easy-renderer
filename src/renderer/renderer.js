@@ -7,7 +7,7 @@ const Vuex = require('vuex');
 const Router = require('vue-router');
 const serialize = require('serialize-javascript');
 const vueServerRenderer = require('vue-server-renderer');
-const SSRPlugin = require('./ssr_plugin');
+const SSRPlugin = require('../plugins/server');
 const StreamTransform = require('./transform');
 const VueHead = require('./head');
 
@@ -121,6 +121,7 @@ class Renderer extends EventEmitter implements IRenderer {
       return component;
     });
   }
+
   /**
    * 
    * 
@@ -130,25 +131,48 @@ class Renderer extends EventEmitter implements IRenderer {
    * @returns {Promise<stream$Readable>} 
    * @memberof Renderer
    */
-  renderToStream(path: string, state: Object, options: RenderOptions): Promise<stream$Readable> {
+  renderToStream(path: string, state?: Object, options?: RenderOptions): Promise<stream$Readable> {
     const context: RendererContext = {
-      state,
-      url: options.url,
+      state: state || {},
+      url: options ? options.url : '/',
     };
+    const isPure = options && options.pure;
     return this.getComponent(path, context).then((component) => {
       const bodyStream = this.vueRenderer.renderToStream(component);
+
+      if (isPure) return bodyStream;
 
       const head = component.$options.head;
       const mergedHead = VueHead.headMerge(head, this.options.head);
       const template = Renderer.getTemplateHtml(mergedHead, context, this.options.global);
       const transform = new StreamTransform(template.head, template.tail);
-
       return bodyStream.pipe(transform);
     });
   }
-  renderToString(path: string, context: RendererContext, options: Object): Promise<string> {
-    this.options.head = {};
-    return options.a;
+  renderToString(path: string, state?: Object, options?: RenderOptions): Promise<string> {
+    const context: RendererContext = {
+      state: state || {},
+      url: options ? options.url : '/',
+    };
+    const isPure = options && options.pure;
+    return this.getComponent(path, context).then(component => new Promise((resolve, reject) => {
+      this.vueRenderer.renderToString(component, (err, result) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        if (isPure) {
+          resolve(result);
+          return;
+        }
+
+        const head = component.$options.head;
+        const mergedHead = VueHead.headMerge(head, this.options.head);
+        const indexHtml = Renderer.getTemplateHtml(mergedHead, context, this.options.global);
+        const html = `${indexHtml.head}${result}${indexHtml.tail}`;
+        resolve(html);
+      });
+    }));
   }
 
   /**

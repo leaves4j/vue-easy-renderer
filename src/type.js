@@ -1,6 +1,13 @@
 // @flow
 import typeof FileSystem from 'fs';
 
+export type CompilerOptions = {
+  config: Object,
+  basePath: string,
+  watch: boolean,
+  global: Object
+};
+
 export interface ICompiler {
   constructor(fs: FileSystem, compilerOptions: Object): void;
   import(request: string): Promise<any>;
@@ -18,9 +25,12 @@ export type RendererContext = {
   state: Object,
   url: string
 }
+
 export type RenderOptions = {
-  url: string
+  url: string,
+  pure: boolean
 }
+
 export interface IRenderer {
   constructor(compiler: ICompiler, options: RendererOptions): void;
   renderToStream(path: string, state: Object, options: RenderOptions): Promise<stream$Readable>;

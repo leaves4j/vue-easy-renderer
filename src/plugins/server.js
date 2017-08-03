@@ -1,3 +1,4 @@
+
 // @flow
 import type _Vue from 'vue';
 
@@ -5,6 +6,7 @@ const SSRServerPlugin = {
   install(Vue: Class<_Vue>): void {
     Vue.mixin({
       beforeCreate(): void {
+        if (this.$parent) return;
         const context = this.$options.$context;
         Object.keys(this.$options).forEach((key) => {
           if (typeof this.$options[key].$ssrInstance === 'function') {

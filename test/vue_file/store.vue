@@ -1,7 +1,7 @@
 <template>
   <div class="test">hello {{world}}</div>
 </template>
-<style scoped>
+<style scoped lang='scss'>
   .test {
     background-color: red;
   }
@@ -14,8 +14,8 @@
 
   const store = new Vuex.Store({
     state: {
-      world: ''
-    }
+      world: '',
+    },
   });
 
   export default {
@@ -24,14 +24,14 @@
     data() {
       return {};
     },
-    created() {
+    async created() {
     },
     methods: {},
     computed: {
       world() {
         return this.$store.state.world;
-      }
+      },
     },
-    components: {}
+    components: {},
   };
 </script>

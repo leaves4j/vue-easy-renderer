@@ -55,9 +55,8 @@ declare module 'vue' {
 }
 
 declare module 'vue-server-renderer' {
-  declare type RenderCallback = (err: Error | null, html: string) => void;
   declare class VueServerRenderer {
-    renderToString(vm: Vue, context?: Object, callback: RenderCallback): string;
+    renderToString(vm: Vue, context: any, callback: any): string;
     renderToStream(vm: Vue, context?: Object): Readable;
   }
   declare module.exports :{
@@ -71,4 +70,8 @@ declare module 'vuex' {
 
 declare module 'vue-router' {
   declare module.exports :{ }
+}
+
+declare module 'memory-fs' {
+  declare module.exports: FileSystem;
 }
