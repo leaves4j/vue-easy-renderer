@@ -24,7 +24,7 @@ const SSRServerPlugin = {
           store.replaceState(Object.assign({}, store.state, context.state));
         }
         if (this.$options.router !== undefined) {
-          this.$options.router.push(this.$options.$context.url);
+          this.$options.router.push(context.url);
         }
         const head = typeof this.$options.head === 'function' ?
           this.$options.head.call(this) :
