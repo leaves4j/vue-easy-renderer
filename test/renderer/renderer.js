@@ -2,12 +2,9 @@
 
 const path = require('path');
 const test = require('ava');
-const chai = require('chai');
 const MemoryFS = require('memory-fs');
 const Compiler = require('../../lib/renderer/compiler');
 const Renderer = require('../../lib/renderer/renderer');
-
-const expect = chai.expect;
 
 
 test('Renderer.constructor() should be ok with options.head', async (t) => {

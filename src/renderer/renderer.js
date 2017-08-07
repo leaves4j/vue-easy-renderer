@@ -168,7 +168,7 @@ class Renderer extends EventEmitter implements IRenderer {
           return;
         }
 
-        const head = component.$options.head;
+        const head = component.$options.$getHead();
         const mergedHead = VueHead.headMerge(head, this.options.head);
         const indexHtml = Renderer.getTemplateHtml(mergedHead, context.state, this.options.global);
         const html = `${indexHtml.head}${result}${indexHtml.tail}`;
