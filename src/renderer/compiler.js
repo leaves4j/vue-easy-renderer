@@ -192,7 +192,7 @@ class Compiler implements ICompiler {
           },
         },
         {
-          test: /\.(?!(js|vue)).*$/,
+          test: /(?!.*\.js|.*\.vue)^.*$/,
           use: {
             loader: 'null-loader',
           },
