@@ -190,6 +190,12 @@ class Compiler implements ICompiler {
               babelrc: false,
             },
           },
+        },
+        {
+          test: /\.(?!(js|vue)).*$/,
+          use: {
+            loader: 'null-loader',
+          },
         }],
       },
       externals: [nodeExternals()],
