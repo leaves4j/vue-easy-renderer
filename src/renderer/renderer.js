@@ -144,7 +144,7 @@ class Renderer extends EventEmitter implements IRenderer {
 
       if (isPure) return bodyStream;
 
-      const head = component.$options.head;
+      const head = component.$options.$getHead();
       const mergedHead = VueHead.headMerge(head, this.options.head);
       const template = Renderer.getTemplateHtml(mergedHead, context.state, this.options.global);
       const transform = new StreamTransform(template.head, template.tail);
