@@ -31,6 +31,7 @@ function rendererFactory(basePath: string, vOptions: Object): Renderer {
     basePath: path.resolve(basePath),
     watch: options.watch,
     global: options.global,
+    outputPath: options.outputPath,
   };
   const compiler = new Compiler(mfs, compilerOptions);
 

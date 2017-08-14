@@ -5,7 +5,8 @@ export type CompilerOptions = {
   config: Object,
   basePath: string,
   watch: boolean,
-  global: Object
+  global: Object,
+  outputPath: string
 };
 
 export interface ICompiler {
