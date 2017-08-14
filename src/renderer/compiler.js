@@ -7,6 +7,7 @@ const vm = require('vm');
 const webpack = require('webpack');
 const nodeVersion = require('node-version');
 const nodeExternals = require('webpack-node-externals');
+const webpackMerge = require('webpack-merge');
 
 const cacheMap: Map<string, any> = new Map();
 const compilingWaitingQueueMap: Map<string, Array<{
@@ -14,17 +15,30 @@ const compilingWaitingQueueMap: Map<string, Array<{
   reject: (e: any) => void
 }>> = new Map();
 
+const defaultOptions: CompilerOptions = {
+  basePath: __dirname,
+  watch: false,
+  global: Object.create(null),
+  config: Object.create(null),
+  outputPath: '/tmp/vue_ssr',
+};
+
+/**
+ * Compiler Class
+ * 
+ * @class Compiler
+ * @implements {ICompiler}
+ */
 class Compiler implements ICompiler {
+  static cacheMap: Map<string, any>;
   fs: FileSystem;
-  basePath: string;
-  watch: boolean;
-  contextGlobal: ?Object;
+  options: CompilerOptions;
   constructor(fs: FileSystem, options?: CompilerOptions) {
+    this.options = Object.assign({}, defaultOptions, options);
     this.fs = fs;
-    this.basePath = options ? options.basePath : __dirname;
-    this.watch = options ? options.watch : false;
-    this.contextGlobal = options ? options.global : Object.create(null);
+    delete this.options.config.output;
   }
+
   /**
    * dynamic import
    * e.g.
@@ -35,8 +49,8 @@ class Compiler implements ICompiler {
    * @memberof Compiler
    */
   import(request: string): Promise<any> {
-    if (cacheMap.has(request)) {
-      return Promise.resolve(cacheMap.get(request));
+    if (Compiler.cacheMap.has(request)) {
+      return Promise.resolve(Compiler.cacheMap.get(request));
     }
     const compilingWaitingQueue = compilingWaitingQueueMap.get(request);
     if (compilingWaitingQueue) {
@@ -63,7 +77,9 @@ class Compiler implements ICompiler {
     const webpackConfig = this.getConfig(fileMap);
     const serverCompiler = webpack(webpackConfig);
     serverCompiler.outputFileSystem = this.fs;
-    const runner = this.watch ? cb => serverCompiler.watch({}, cb) : cb => serverCompiler.run(cb);
+    const runner = this.options.watch
+      ? cb => serverCompiler.watch({}, cb)
+      : cb => serverCompiler.run(cb);
     return new Promise((resolve, reject) => {
       runner((error, stats) => {
         if (error) {
@@ -99,7 +115,7 @@ class Compiler implements ICompiler {
     return this.compile(filePaths).then(() => Promise.all(filePaths.map(filePath =>
       new Promise((resolve, reject) => {
         const fileName = Compiler.getFileNameByPath(filePath);
-        this.fs.readFile(`/temp/vue_ssr/${fileName}.js`, (error, data) => {
+        this.fs.readFile(path.normalize(`${this.options.outputPath}/${fileName}.js`), (error, data) => {
           const compilingWaitingQueue = compilingWaitingQueueMap.get(filePath);
           if (error) {
             if (compilingWaitingQueue) {
@@ -110,7 +126,7 @@ class Compiler implements ICompiler {
           }
 
           const object = this.getObject(data.toString());
-          cacheMap.set(filePath, object);
+          Compiler.cacheMap.set(filePath, object);
           if (compilingWaitingQueue) {
             compilingWaitingQueue.forEach(callback => callback.resolve(object));
           }
@@ -127,7 +143,7 @@ class Compiler implements ICompiler {
    * @memberof Compiler
    */
   getObject(sourceFile: string): any {
-    const sandboxGlobal = Object.assign({}, global, { module, require }, this.contextGlobal);
+    const sandboxGlobal = Object.assign({}, global, { module, require }, this.options.global);
     const sandbox = vm.createContext(sandboxGlobal);
     return vm.runInContext(sourceFile, sandbox);
   }
@@ -144,11 +160,11 @@ class Compiler implements ICompiler {
     [...fileMap.entries()].forEach(([fileName, filePath]) => {
       entry[fileName] = [filePath];
     });
-    const config = {
+    const defaultConfig = {
       entry,
       target: 'node',
       output: {
-        path: '/temp/vue_ssr',
+        path: this.options.outputPath,
         filename: '[name].js',
         libraryTarget: 'commonjs2',
       },
@@ -190,16 +206,10 @@ class Compiler implements ICompiler {
               babelrc: false,
             },
           },
-        },
-        {
-          test: /(?!.*\.js|.*\.vue)^.*$/,
-          use: {
-            loader: 'null-loader',
-          },
         }],
       },
       externals: [nodeExternals()],
-      context: this.basePath,
+      context: this.options.basePath,
       plugins: [
         new webpack.DefinePlugin({
           'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
@@ -207,8 +217,8 @@ class Compiler implements ICompiler {
         }),
       ],
     };
-    config.entry = entry;
-    return config;
+
+    return webpackMerge(defaultConfig, this.options.config);
   }
   /**
    * get file name by path
@@ -219,7 +229,11 @@ class Compiler implements ICompiler {
    * @memberof Compiler
    */
   static getFileNameByPath(filePath: string): string {
-    return filePath.split(path.sep).join('_').replace(':', '_');
+    const pathHexStr: string = (new Buffer(filePath)).toString('hex');
+    return `${path.basename(filePath)}.${pathHexStr}`;
   }
 }
+
+Compiler.cacheMap = cacheMap;
+
 module.exports = Compiler;
