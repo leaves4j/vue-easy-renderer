@@ -7,13 +7,13 @@ declare module 'webpack' {
     toJson(): Object,
     hasErrors(): boolean
   }
-  declare class Compiler {
+  declare interface Compiler {
     outputFileSystem: FileSystem;
     watch(options: Object, callback: (error: Error, stats: Stats) => void): void;
     run(callback: (error: Error, stats: Stats) => void): void;
   }
 
-  declare class DefinePlugin {
+  declare interface DefinePlugin {
     constructor(option: { [key: string]: string }): void;
   }
   declare module.exports: {
@@ -31,11 +31,11 @@ declare module 'serialize-javascript' {
 declare module 'node-version' {
   declare module.exports: {
     original: string,
-      short: string,
-        long: string,
-          major: string,
-            minor: string,
-              build: string
+    short: string,
+    long: string,
+    major: string,
+    minor: string,
+    build: string
   }
 }
 declare module 'webpack-node-externals' {
@@ -51,11 +51,13 @@ declare module 'vue' {
     static use(vuePlugin: Object): void;
     static mixin(options: Object): void;
   }
+
+
   declare module.exports: typeof Component;
 }
 
 declare module 'vue-server-renderer' {
-  declare class VueServerRenderer {
+  declare interface VueServerRenderer {
     renderToString(vm: Vue, context: any, callback: any): string;
     renderToStream(vm: Vue, context?: Object): Readable;
   }
@@ -74,4 +76,13 @@ declare module 'vue-router' {
 
 declare module 'memory-fs' {
   declare module.exports: FileSystem;
+}
+
+declare module 'webpack-merge' {
+  declare interface WebpackMerge {
+      (...configs: Object[]): Object,
+      smart(...configs: Object[]): Object
+  }
+  declare var merge: WebpackMerge;
+  declare module.exports: typeof merge
 }
