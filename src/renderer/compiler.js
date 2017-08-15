@@ -206,6 +206,12 @@ class Compiler implements ICompiler {
               babelrc: false,
             },
           },
+        },
+        {
+          test: /\.css$|\.scss|\.sass|\.less$/,
+          use: {
+            loader: 'null-loader',
+          },
         }],
       },
       externals: [nodeExternals()],
