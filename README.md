@@ -4,13 +4,15 @@ vue-easy-renderer
 
 [中文说明](https://github.com/leaves4j/vue-easy-renderer/blob/master/README-zh.md)
 
-+ [Installation](#installation)
-+ [Example](#example)
-+ [API](#api)
-+ [Renderer Options](#renderer-options)
-+ [Vue Client Plugin](#vue-client-plugin)
-+ [Component Head](#component-head)
-+ [Change Log](#change-log)
+  - [Installation](#installation)
+  - [Example](#example)
+  - [API](#api)
+  - [Renderer Options](#renderer-options)
+  - [Vue Client Plugin](#vue-client-plugin)
+  - [Component Head](#component-head)
+  - [vuex or vue-router](#vuex-or-vue-router)
+  - [ChangeLog](#changelog)
+  - [License](#license)
 
 ## Installation
 
@@ -26,7 +28,7 @@ npm i vue vuex vue-router vue-loader vue-server-renderer -S
 
 ## Example
 
-### Vue File
+**Vue File**
 
 Create the vue file in `component/hello_word/hello_word.vue`
 
@@ -48,7 +50,7 @@ Create the vue file in `component/hello_word/hello_word.vue`
 </script>
 ```
 
-### Koa.js 2
+**Koa.js 2**
 
 ```js
 'use strict';
@@ -78,7 +80,7 @@ module.exports = app;
 
 ```
 
-### Express.js
+**Express.js**
 
 ```js
 'use strict';
@@ -102,7 +104,8 @@ module.exports = app;
 
 ```
 
-### Result
+**Result**
+
 The browser get the html:
 
 ```html
@@ -119,7 +122,7 @@ Detail in [Full example](https://github.com/leaves4j/vue-easy-renderer/tree/mast
 
 ## API
 
-### vueRender(path,data,config)
+**vueRender(path,data,config)**
 
 Use `ctx.vueRender()` in koa.js or `res.vueRender()` in express
 
@@ -132,29 +135,28 @@ Use `ctx.vueRender()` in koa.js or `res.vueRender()` in express
 
 ## Renderer Options
 
-### vueEasyRenderer(basePath,options)
-
-**get vueEasyRenderer**
+**vueEasyRenderer(basePath,options)**
 
 With `Koa.js 2`
 
 ```js
 const vueEasyRenderer = require('vue-easy-renderer').koaRenderer;
+const renderer = vueEasyRenderer(bastPath, options);
 ```
 
 With `Express.js`
 
 ```js
 const vueEasyRenderer = require('vue-easy-renderer').connectRenderer;
+const renderer = vueEasyRenderer(bastPath, options);
 ```
 
-**Params:**
+**Options**
 
 | Param | Type | Description |
 | --- | --- | --- |
 | basePath | `string` | `*.vue` file base path |
 | [options] | `Object` | renderer options |
-| [options.watch] | `Boolean` | default `false`, watch the '*.vue' file changes |
 | [options.plugins] | `Array` \| `string` | vue plugins, e.g. `[vueRouter]` or `[{plugin: vueRouter,options: {}}]`, it also support using plugin path string, e.g. `[path.resolve('../app/resource.js')]` |
 | [options.preCompile] | `Array` | pre-compile `*.vue` file list |
 | [options.head] | `Object` | common html head config see detail in [Component Head](#component-head) |
@@ -228,6 +230,39 @@ Then the result
 </html>
 ```
 
+## vuex or vue-router
+
+When using vuex or vue-router in server-side rendering, we need to create a vuex or vue-router instance for each request, so when you inject a vuex or vue-router instance into a component, you need to add a factory function to the instance , The function will return an instance when called, the default method is named `$ ssrInstance`, such as:
+
+**vuex**
+
+```js
+const options = {
+  state: {
+    hello: 'world!'
+  }
+};
+
+const store = new Vuex(options);
+store.$ssrInstance = () => new Vuex(options);
+export default store;
+```
+
+**vue-router**
+
+```js
+const options = {
+  mode: 'history',
+  routes: [
+    { path: '/user/:id', component: User }
+  ]
+})
+
+const router = new VueRouter(options)
+router.$ssrInstance = () => new Vuex(options);
+export default router;
+```
+If you use `vue-router` in server rendering, you need to set `mode` to `history`
 ## ChangeLog
 
 [ChangeLog](https://github.com/leaves4j/vue-easy-renderer/blob/master/CHANGELOG.md)

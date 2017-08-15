@@ -2,13 +2,15 @@ vue-easy-renderer
 ---
 `vue-easy-renderer` 是一个基于 `vue-server-renderer` 的服务端渲染工具, 他提供了更简单的方式来实现vue的服务端渲染， 包括 `Koa.js` 和 `Express.js` 的插件.
 
-+ [Installation](#installation)
-+ [Example](#example)
-+ [API](#api)
-+ [Renderer Options](#renderer-options)
-+ [Vue Client Plugin](#vue-client-plugin)
-+ [Component Head](#component-head)
-+ [Change Log](#change-log)
+  - [Installation](#installation)
+  - [Example](#example)
+  - [API](#api)
+  - [Renderer 选项](#renderer-选项)
+  - [Vue Client Plugin](#vue-client-plugin)
+  - [Component Head](#component-head)
+  - [vuex or vue-router](#vuex-or-vue-router)
+  - [ChangeLog](#changelog)
+  - [License](#license)
 
 ## Installation
 
@@ -24,7 +26,7 @@ npm i vue vuex vue-router vue-loader vue-server-renderer -S
 
 ## Example
 
-### Vue File
+**Vue File**
 
 创建一个文件 `component/hello_word/hello_word.vue`
 
@@ -46,7 +48,7 @@ npm i vue vuex vue-router vue-loader vue-server-renderer -S
 </script>
 ```
 
-### Koa.js 2
+**Koa.js 2**
 
 ```js
 'use strict';
@@ -76,7 +78,7 @@ module.exports = app;
 
 ```
 
-### Express.js
+**Express.js**
 
 ```js
 'use strict';
@@ -100,7 +102,7 @@ module.exports = app;
 
 ```
 
-### Result
+**Result**
 
 最后浏览器获取到的html
 
@@ -118,48 +120,49 @@ Detail in [Full example](https://github.com/leaves4j/vue-easy-renderer/tree/mast
 
 ## API
 
-### vueRender(path,data,config)
+**vueRender(path,data,config)**
 
 在 `koa.js` 中 `vueRender`挂载在`ctx`上，即 `ctx.vueRender()`，在`express.js`中挂载在`res`上，即 `res.vueRender()`
 
-| 参数 | 类型 | 描述 |
-| --- | --- | --- |
-| path | `String` | `*.vue` 基于 [`Options.basePath`](#renderer-options) 的路径  |
-| data | `Object` | 渲染数据，将会被合并到vue实例的data中或者vuex的state中|
-| [config] | `Object` | 渲染选项 |
-| [config.pure] | `Boolean` | 默认 `false`, 当设置为`pure:true`时，将会只渲染vue文件的html,不包含头尾|
+| 参数          | 类型                                                                                | 描述                                                   |
+| ------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| path          | `String` | `*.vue` 基于 [`Options.basePath`](#renderer-options) 的路径              |
+| data          | `Object`                                                                            | 渲染数据，将会被合并到vue实例的data中或者vuex的state中 |
+| [config]      | `Object`                                                                            | 渲染选项                                               |
+| [config.pure] | `Boolean` | 默认 `false`, 当设置为`pure:true`时，将会只渲染vue文件的html,不包含头尾 |
 ## Renderer 选项
 
-### vueEasyRenderer(basePath,options)
+**vueEasyRenderer(basePath,options)**
 
-**获取 vueEasyRenderer**
+获取 vueEasyRenderer
 
 With `Koa.js 2`
 
 ```js
 const vueEasyRenderer = require('vue-easy-renderer').koaRenderer;
+const renderer = vueEasyRenderer(basePath, options);
 ```
 
 With `Express.js`
 
 ```js
 const vueEasyRenderer = require('vue-easy-renderer').connectRenderer;
+const renderer = vueEasyRenderer(basePath, options);
 ```
 
-**参数:**
+**参数**
 
-| 参数 | 类型 | 描述 |
-| --- | --- | --- |
-| basePath | `string` | `*.vue` 文件路径 |
-| [options] | `Object` | renderer 的 options |
-| [options.watch] | `Boolean` | 默认值 `false`, 是否监控 '*.vue' 的变更, 当process.env.NODE_ENV|
-| [options.plugins] | `Array` \| `string` | vue插件, 如 `[vueRouter]` 或者 `[{plugin: vueRouter,options: {}}]`, 同时也支持字符串，如： `[path.resolve('../app/resource.js')]` |
-| [options.preCompile] | `Array` | 需要预编译的 `*.vue` 文件路径列表，如：`['test.vue']` |
-| [options.head] | `Object` | 通用的html头部设置， 详情见 [Component Head](#component-head) |
-| [options.compilerConfig] | `Object` | 服务端vue文件的编译器配置，为webpack配置文件，默认配置使用 `vue-loader` 、 `css-loader` 、 `babel-loader`|
-| [options.onError] | `Function` | 异常处理方法|
-| [options.onReady] | `Function` | ready 时间处理方法, renderer 将会在完成初始化工作之后emit一个ready事件|
-| [options.global] | `Object` | 全局变量, 这些全局变量将会被注入的vue服务端渲染时的sandbox的作用域，相当于node中的global.xx，浏览器中的window.xx|
+| 参数                     | 类型                                                                                                                                                    | 描述                                                                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| basePath                 | `string` | `*.vue` 文件路径                                                                                                                             |
+| [options]                | `Object`                                                                                                                                                | renderer 的 options                                                                                              |
+| [options.plugins]        | `Array` \| `string` | vue插件, 如 `[vueRouter]` 或者 `[{plugin: vueRouter,options: {}}]`, 同时也支持字符串，如： `[path.resolve('../app/resource.js')]` |
+| [options.preCompile]     | `Array` | 需要预编译的 `*.vue` 文件路径列表，如：`['test.vue']`                                                                                         |
+| [options.head]           | `Object`                                                                                                                                                | 通用的html头部设置， 详情见 [Component Head](#component-head)                                                    |
+| [options.compilerConfig] | `Object` | 服务端vue文件的编译器配置，为webpack配置文件，默认配置使用 `vue-loader`、 `babel-loader`                                                     |
+| [options.onError]        | `Function`                                                                                                                                              | 异常处理方法                                                                                                     |
+| [options.onReady]        | `Function`                                                                                                                                              | ready 时间处理方法, renderer 将会在完成初始化工作之后emit一个ready事件                                           |
+| [options.global]         | `Object`                                                                                                                                                | 全局变量, 这些全局变量将会被注入的vue服务端渲染时的sandbox的作用域，相当于node中的global.xx，浏览器中的window.xx |
 
 
 ## Vue Client Plugin
@@ -225,6 +228,42 @@ Then the result
 </body>
 </html>
 ```
+
+## vuex or vue-router
+
+在服务端渲染中使用vuex或者vue-router时，我们需要为每个请求创建一个vuex或者vue-router实例，因此在跟组件注入vuex或者vue-router实例时，需要在实例上添加一个工厂方法，该方法调用时返回一个实例，默认方法名为`$ssrInstance`，如:
+
+**vuex**
+
+```js
+const options = {
+  state: {
+    hello: 'world!'
+  }
+};
+
+const store = new Vuex(options);
+store.$ssrInstance = () => new Vuex(options);
+export default store;
+```
+
+**vue-router**
+
+```js
+const options = {
+  mode: 'history',
+  routes: [
+    { path: '/user/:id', component: User }
+  ]
+})
+
+const router = new VueRouter(options)
+router.$ssrInstance = () => new Vuex(options);
+export default router;
+```
+如果在服务端渲染中使用`vue-router`，需要设置`mode`为`history`
+
+
 
 ## ChangeLog
 
