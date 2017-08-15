@@ -79,7 +79,7 @@ test('renderer.renderToStream() should be ok', async (t) => {
 test('Renderer should be ok with store', async (t) => {
   const filePath = path.resolve(__dirname, '../vue_file/store.vue');
   const compiler = new Compiler(new MemoryFS());
-  const renderer = new Renderer(compiler, { useStore: 'auto' });
+  const renderer = new Renderer(compiler);
   renderer.on('error', e => t.fail(e));
   const string = await renderer.renderToString(filePath, { world: 'world!' });
   t.true(string.includes('hello world!'));
