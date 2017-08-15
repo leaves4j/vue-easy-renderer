@@ -1,3 +1,8 @@
+v1.0.0 / 2017-08-15
+---
+### Changes
+  * reconstructing code to improve performance
+
 v0.10.3 / 2017-04-26
 ---
 ### Fixed
