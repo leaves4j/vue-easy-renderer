@@ -13,6 +13,9 @@ const defaultOptions = {
   compilerConfig: {},
   preCompile: [],
   plugins: [],
+  watch: false,
+  outputPath: 'tmp/vue_ssr',
+  global: Object.create(null),
 };
 
 /**
