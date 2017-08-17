@@ -14,7 +14,7 @@ const defaultOptions = {
   preCompile: [],
   plugins: [],
   watch: false,
-  outputPath: 'tmp/vue_ssr',
+  outputPath: '/tmp/vue_ssr',
   global: Object.create(null),
 };
 
@@ -25,7 +25,7 @@ const defaultOptions = {
  * @param {Object} vOptions
  * @returns
  */
-function rendererFactory(basePath: string, vOptions: Object): Renderer {
+function rendererFactory(basePath: string, vOptions?: Object): Renderer {
   const options = Object.assign({}, defaultOptions, vOptions);
   options.preCompile = options.preCompile.map(filePath => path.resolve(basePath, filePath));
 
