@@ -35,7 +35,7 @@ class Renderer extends EventEmitter implements IRenderer {
    * @param {RendererOptions} options 
    * @memberof Renderer
    */
-  constructor(compiler: ICompiler, options: RendererOptions) {
+  constructor(compiler: ICompiler, options?: RendererOptions) {
     super();
     this.compiler = compiler;
     this.vueRenderer = vueServerRenderer.createRenderer();

@@ -6,17 +6,17 @@ const rendererFactory = require('./renderer/factory');
 
 const noop = () => { };
 
-function vueEasyRenderer(basePath: string, VEROptions: Object) {
+function vueEasyRenderer(basePath: string, VEROptions?: Object) {
   const errorHandler = (e) => {
     e.name = `VueEasyRenderer${e.name}`;
     e.type = 'VueEasyRendererError';
-    if (VEROptions.onError) {
+    if (VEROptions && VEROptions.onError) {
       VEROptions.onError(e);
     } else {
       console.error(e); // eslint-disable-line no-console
     }
   };
-  const readyHandler = VEROptions.onReady || noop;
+  const readyHandler = (VEROptions && VEROptions.onReady) || noop;
 
   const renderer = rendererFactory(basePath, VEROptions);
   renderer.on('error', errorHandler);
