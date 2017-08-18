@@ -1,5 +1,5 @@
 // @flow
-import type { RendererOptions, CompilerOptions } from '../type';
+import type { RendererOptionsParams, CompilerOptionParams, FactoryOptionParams } from '../type';
 
 const path = require('path');
 const MemoryFS = require('memory-fs');
@@ -25,11 +25,11 @@ const defaultOptions = {
  * @param {Object} vOptions
  * @returns
  */
-function rendererFactory(basePath: string, vOptions?: Object): Renderer {
+function rendererFactory(basePath: string, vOptions?: FactoryOptionParams): Renderer {
   const options = Object.assign({}, defaultOptions, vOptions);
   options.preCompile = options.preCompile.map(filePath => path.resolve(basePath, filePath));
 
-  const compilerOptions: CompilerOptions = {
+  const compilerOptions: CompilerOptionParams = {
     config: options.compilerConfig,
     basePath: path.resolve(basePath),
     watch: options.watch,
@@ -38,7 +38,7 @@ function rendererFactory(basePath: string, vOptions?: Object): Renderer {
   };
   const compiler = new Compiler(mfs, compilerOptions);
 
-  const rendererOptions: RendererOptions = {
+  const rendererOptions: RendererOptionsParams = {
     head: options.head,
     plugins: options.plugins,
     preCompile: options.preCompile,

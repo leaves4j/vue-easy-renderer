@@ -1,6 +1,6 @@
 // @flow
 import typeof FileSystem from 'fs';
-import type { ICompiler, CompilerOptions } from '../type';
+import type { ICompiler, CompilerOptions, CompilerOptionParams } from '../type';
 
 const path = require('path');
 const vm = require('vm');
@@ -33,7 +33,7 @@ class Compiler implements ICompiler {
   static cacheMap: Map<string, any>;
   fs: FileSystem;
   options: CompilerOptions;
-  constructor(fs: FileSystem, options?: CompilerOptions) {
+  constructor(fs: FileSystem, options?: CompilerOptionParams) {
     this.options = Object.assign({}, defaultOptions, options);
     this.fs = fs;
     delete this.options.config.output;

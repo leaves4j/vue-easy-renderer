@@ -1,5 +1,5 @@
 // @flow
-import type { ICompiler, IRenderer, RendererOptions, RendererContext, RenderOptions } from '../type';
+import type { ICompiler, IRenderer, RendererOptions, RendererOptionsParams, RendererContext, RenderOptions } from '../type';
 
 const EventEmitter = require('events');
 const Vue = require('vue');
@@ -32,10 +32,10 @@ class Renderer extends EventEmitter implements IRenderer {
   /**
    * Creates an instance of Renderer.
    * @param {ICompiler} compiler 
-   * @param {RendererOptions} options 
+   * @param {RendererOptionsParams} options 
    * @memberof Renderer
    */
-  constructor(compiler: ICompiler, options?: RendererOptions) {
+  constructor(compiler: ICompiler, options?: RendererOptionsParams) {
     super();
     this.compiler = compiler;
     this.vueRenderer = vueServerRenderer.createRenderer();

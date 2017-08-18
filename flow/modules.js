@@ -58,7 +58,7 @@ declare module 'vue' {
 
 declare module 'vue-server-renderer' {
   declare interface VueServerRenderer {
-    renderToString(vm: Vue, context: any, callback: any): string;
+    renderToString(vm: Vue, context?: Object | Function, callback?: Function): string;
     renderToStream(vm: Vue, context?: Object): Readable;
   }
   declare module.exports :{

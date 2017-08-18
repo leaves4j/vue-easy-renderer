@@ -1,12 +1,12 @@
 // @flow
-import type { RenderOptions } from './type';
+import type { RenderOptions, VueEasyRendererOptionsParams } from './type';
 
 const path = require('path');
 const rendererFactory = require('./renderer/factory');
 
 const noop = () => { };
 
-function vueEasyRenderer(basePath: string, VEROptions?: Object) {
+function vueEasyRenderer(basePath: string, VEROptions?: VueEasyRendererOptionsParams) {
   const errorHandler = (e) => {
     e.name = `VueEasyRenderer${e.name}`;
     e.type = 'VueEasyRendererError';

@@ -9,8 +9,16 @@ export type CompilerOptions = {
   outputPath: string
 };
 
+export type CompilerOptionParams = {
+  config?: Object,
+  basePath?: string,
+  watch?: boolean,
+  global?: Object,
+  outputPath?: string
+};
+
 export interface ICompiler {
-  constructor(fs: FileSystem, compilerOptions: Object): void;
+  constructor(fs: FileSystem, compilerOptions: CompilerOptionParams): void;
   import(request: string): Promise<any>;
   load(requests: Array<string>): Promise<void>;
 }
@@ -20,6 +28,13 @@ export type RendererOptions = {
   plugins: Array<string | Object>,
   preCompile: Array<string>,
   global: Object
+};
+
+export type RendererOptionsParams = {
+  head?: Object,
+  plugins?: Array<string | Object>,
+  preCompile?: Array<string>,
+  global?: Object
 };
 
 export type RendererContext = {
@@ -33,7 +48,29 @@ export type RenderOptions = {
 }
 
 export interface IRenderer {
-  constructor(compiler: ICompiler, options: RendererOptions): void;
+  constructor(compiler: ICompiler, options: RendererOptionsParams): void;
   renderToStream(path: string, state: Object, options: RenderOptions): Promise<stream$Readable>;
   renderToString(path: string, state: Object, options: RenderOptions): Promise<string>;
+}
+
+export type FactoryOptionParams = {
+  head?: Object,
+  compilerConfig?: Object,
+  preCompile?: Array<string>,
+  plugins?: Array<string | Object>,
+  watch?: boolean,
+  outputPath?: string,
+  global?: Object,
+}
+
+export type VueEasyRendererOptionsParams = {
+  head?: Object,
+  compilerConfig?: Object,
+  preCompile?: Array<string>,
+  plugins?: Array<string | Object>,
+  watch?: boolean,
+  outputPath?: string,
+  global?: Object,
+  onReady: () => void,
+  onError: (e: Object) =>void
 }
