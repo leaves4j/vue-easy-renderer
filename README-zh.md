@@ -156,7 +156,7 @@ const renderer = vueEasyRenderer(basePath, options);
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | basePath                 | `string` | `*.vue` 文件路径                                                                                                                             |
 | [options]                | `Object`                                                                                                                                                | renderer 的 options                                                                                              |
-| [options.plugins]        | `Array` \| `string` | vue插件, 如 `[vueRouter]` 或者 `[{plugin: vueRouter,options: {}}]`, 同时也支持字符串，如： `[path.resolve('../app/resource.js')]` |
+| [options.plugins]        | `Array<Object|string>` | vue插件, 如 `[vueRouter]`, 同时也支持字符串，如： `[path.resolve('../app/resource.js')]` |
 | [options.preCompile]     | `Array` | 需要预编译的 `*.vue` 文件路径列表，如：`['test.vue']`                                                                                         |
 | [options.head]           | `Object`                                                                                                                                                | 通用的html头部设置， 详情见 [Component Head](#component-head)                                                    |
 | [options.compilerConfig] | `Object` | 服务端vue文件的编译器配置，为webpack配置文件，默认配置使用 `vue-loader`、 `babel-loader`                                                     |
