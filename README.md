@@ -157,7 +157,7 @@ const renderer = vueEasyRenderer(bastPath, options);
 | --- | --- | --- |
 | basePath | `string` | `*.vue` file base path |
 | [options] | `Object` | renderer options |
-| [options.plugins] | `Array<Object|string>` | vue plugins, e.g. `[vueRouter]`, it also support using plugin path string, e.g. `[path.resolve('../app/resource.js')]` |
+| [options.plugins] | `Array<Object\|string>` | vue plugins, e.g. `[vueRouter]`, it also support using plugin path string, e.g. `[path.resolve('../app/resource.js')]` |
 | [options.preCompile] | `Array` | pre-compile `*.vue` file list |
 | [options.head] | `Object` | common html head config see detail in [Component Head](#component-head) |
 | [options.compilerConfig] | `Object` | server-side compiler webpack config, default config use `vue-loader` with `css-loader` and `babel-loader`|
