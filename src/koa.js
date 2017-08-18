@@ -41,7 +41,7 @@ function vueEasyRenderer(basePath: string, VEROptions?: VueEasyRendererOptionPar
       const renderOptions = Object.assign({}, { url }, options);
       return renderer.renderToStream(filePath, state, renderOptions);
     };
-    ctx.vueRenderToString = (vueFilePath: string, state?: Object, options?: RenderOptions): Promise<void> => {
+    ctx.vueRenderToString = (vueFilePath: string, state?: Object, options?: RenderOptions): Promise<string> => {
       const renderOptions = Object.assign({}, { url }, options);
       const filePath = path.resolve(basePath, vueFilePath);
       return renderer.renderToString(filePath, state, renderOptions);
