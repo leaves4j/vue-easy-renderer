@@ -30,7 +30,7 @@ export type RendererOptions = {
   global: Object
 };
 
-export type RendererOptionsParams = {
+export type RendererOptionParams = {
   head?: Object,
   plugins?: Array<string | Object>,
   preCompile?: Array<string>,
@@ -48,7 +48,7 @@ export type RenderOptions = {
 }
 
 export interface IRenderer {
-  constructor(compiler: ICompiler, options: RendererOptionsParams): void;
+  constructor(compiler: ICompiler, options: RendererOptionParams): void;
   renderToStream(path: string, state: Object, options: RenderOptions): Promise<stream$Readable>;
   renderToString(path: string, state: Object, options: RenderOptions): Promise<string>;
 }
@@ -63,7 +63,7 @@ export type FactoryOptionParams = {
   global?: Object,
 }
 
-export type VueEasyRendererOptionsParams = {
+export type VueEasyRendererOptionParams = {
   head?: Object,
   compilerConfig?: Object,
   preCompile?: Array<string>,

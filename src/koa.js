@@ -1,12 +1,12 @@
 // @flow
-import type { RenderOptions, VueEasyRendererOptionsParams } from './type';
+import type { RenderOptions, VueEasyRendererOptionParams } from './type';
 
 const path = require('path');
 const rendererFactory = require('./renderer/factory');
 
 const noop = () => { };
 
-function vueEasyRenderer(basePath: string, VEROptions?: VueEasyRendererOptionsParams) {
+function vueEasyRenderer(basePath: string, VEROptions?: VueEasyRendererOptionParams) {
   const errorHandler = (e) => {
     e.name = `VueEasyRenderer${e.name}`;
     e.type = 'VueEasyRendererError';
@@ -36,12 +36,12 @@ function vueEasyRenderer(basePath: string, VEROptions?: VueEasyRendererOptionsPa
         return Promise.reject(e);
       });
     };
-    ctx.vueRenderToStream = (vueFilePath: string, state?: Object, options?: RenderOptions) => {
+    ctx.vueRenderToStream = (vueFilePath: string, state?: Object, options?: RenderOptions): Promise<stream$Readable> => {
       const filePath = path.resolve(basePath, vueFilePath);
       const renderOptions = Object.assign({}, { url }, options);
       return renderer.renderToStream(filePath, state, renderOptions);
     };
-    ctx.vueRenderToString = (vueFilePath: string, state?: Object, options?: RenderOptions) => {
+    ctx.vueRenderToString = (vueFilePath: string, state?: Object, options?: RenderOptions): Promise<void> => {
       const renderOptions = Object.assign({}, { url }, options);
       const filePath = path.resolve(basePath, vueFilePath);
       return renderer.renderToString(filePath, state, renderOptions);
