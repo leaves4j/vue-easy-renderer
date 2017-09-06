@@ -224,7 +224,7 @@ class Compiler implements ICompiler {
       ],
     };
 
-    return webpackMerge(defaultConfig, this.options.config);
+    return webpackMerge.smart(defaultConfig, this.options.config);
   }
   /**
    * get file name by path
