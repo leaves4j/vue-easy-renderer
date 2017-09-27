@@ -141,6 +141,10 @@ class Renderer extends EventEmitter implements IRenderer {
     const isPure = options && options.pure;
     return this.getComponent(path, context).then((component) => {
       const bodyStream = this.vueRenderer.renderToStream(component);
+      bodyStream.on('error', (e) => {
+        e.component = path;
+        this.emit('error', e);
+      });
 
       if (isPure) return bodyStream;
 
@@ -158,9 +162,10 @@ class Renderer extends EventEmitter implements IRenderer {
     };
     const isPure = options && options.pure;
     return this.getComponent(path, context).then(component => new Promise((resolve, reject) => {
-      this.vueRenderer.renderToString(component, (err, result) => {
-        if (err) {
-          reject(err);
+      this.vueRenderer.renderToString(component, (e, result) => {
+        if (e) {
+          e.component = path;
+          reject(e);
           return;
         }
         if (isPure) {
