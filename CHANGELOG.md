@@ -1,3 +1,9 @@
+v1.0.3 / 2017-09-27
+---
+### Changes
+  * add `renderStream` error event handler
+  * add component path to error info
+
 v1.0.0 / 2017-08-15
 ---
 ### Changes
