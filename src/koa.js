@@ -8,7 +8,7 @@ const noop = () => { };
 
 function vueEasyRenderer(basePath: string, VEROptions?: VueEasyRendererOptionParams) {
   const errorHandler = (e) => {
-    e.name = `VueEasyRenderer${e.name}`;
+    e.name = `VueEasyRenderer: ${e.name}`;
     e.type = 'VueEasyRendererError';
     if (VEROptions && VEROptions.onError) {
       VEROptions.onError(e);
@@ -32,6 +32,7 @@ function vueEasyRenderer(basePath: string, VEROptions?: VueEasyRendererOptionPar
       return renderer.renderToStream(filePath, state, renderOptions).then((result) => {
         ctx.body = result;
       }).catch((e) => {
+        e.component = vueFilePath;
         errorHandler(e);
         return Promise.reject(e);
       });
