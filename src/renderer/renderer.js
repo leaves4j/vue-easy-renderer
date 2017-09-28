@@ -10,6 +10,7 @@ const vueServerRenderer = require('vue-server-renderer');
 const SSRPlugin = require('../plugins/server');
 const StreamTransform = require('./transform');
 const VueHead = require('./head');
+const ErrorTypes = require('../error');
 
 Vue.use(SSRPlugin);
 Vue.use(Vuex);
@@ -58,7 +59,10 @@ class Renderer extends EventEmitter implements IRenderer {
     this.options.preCompile.push(...needCompiledPlugin);
     this.compiler.load(this.options.preCompile).then(() => {
       this.emit('ready');
-    }).catch(e => this.emit('error', e));
+    }).catch((e) => {
+      const error = new ErrorTypes.BaseError(e);
+      this.emit('error', error);
+    });
   }
 
   /**
@@ -143,7 +147,10 @@ class Renderer extends EventEmitter implements IRenderer {
       const bodyStream = this.vueRenderer.renderToStream(component);
       bodyStream.on('error', (e) => {
         e.component = path;
-        this.emit('error', e);
+        const error = new ErrorTypes.RenderError(e);
+        error.component = path;
+        error.state = state;
+        this.emit('error', error);
       });
 
       if (isPure) return bodyStream;

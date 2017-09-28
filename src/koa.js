@@ -3,13 +3,12 @@ import type { RenderOptions, VueEasyRendererOptionParams } from './type';
 
 const path = require('path');
 const rendererFactory = require('./renderer/factory');
+const ErrorTypes = require('./error');
 
 const noop = () => { };
 
 function vueEasyRenderer(basePath: string, VEROptions?: VueEasyRendererOptionParams) {
-  const errorHandler = (e) => {
-    e.name = `VueEasyRenderer: ${e.name}`;
-    e.type = 'VueEasyRendererError';
+  const errorHandler = (e: ErrorTypes.BaseError) => {
     if (VEROptions && VEROptions.onError) {
       VEROptions.onError(e);
     } else {
@@ -32,9 +31,11 @@ function vueEasyRenderer(basePath: string, VEROptions?: VueEasyRendererOptionPar
       return renderer.renderToStream(filePath, state, renderOptions).then((result) => {
         ctx.body = result;
       }).catch((e) => {
-        e.component = vueFilePath;
-        errorHandler(e);
-        return Promise.reject(e);
+        const error = new ErrorTypes.RenderError(e);
+        error.component = vueFilePath;
+        error.state = state;
+        errorHandler(error);
+        return Promise.reject(error);
       });
     };
     ctx.vueRenderToStream = (vueFilePath: string, state?: Object, options?: RenderOptions): Promise<stream$Readable> => {

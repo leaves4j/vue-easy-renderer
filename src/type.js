@@ -72,5 +72,6 @@ export type VueEasyRendererOptionParams = {
   outputPath?: string,
   global?: Object,
   onReady: () => void,
-  onError: (e: Object) =>void
+  onError: (e: Object) => void
 }
+
