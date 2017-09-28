@@ -1,3 +1,8 @@
+v1.0.4 / 2017-09-28
+---
+### Changes
+  * add `ErrorTypes`
+
 v1.0.3 / 2017-09-27
 ---
 ### Changes
