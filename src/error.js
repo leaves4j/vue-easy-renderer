@@ -30,7 +30,7 @@ class RenderError extends BaseError {
   state: ?Object;
   component: string;
   constructor(e: ?Error): void {
-    super();
+    super(e);
     if (e) {
       this.name = `[VueEasyRenderer]RenderError: ${e.name}`;
     }

@@ -1,3 +1,8 @@
+v1.1.1 / 2017-10-17
+---
+### Fixed
+  * fixed `ErrorTypes` miss message bug
+
 v1.1.0 / 2017-09-28
 ---
 ### Changes
