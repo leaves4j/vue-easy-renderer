@@ -146,10 +146,14 @@ class Renderer extends EventEmitter implements IRenderer {
     return this.getComponent(path, context).then((component) => {
       const bodyStream = this.vueRenderer.renderToStream(component);
       bodyStream.on('error', (e) => {
-        e.component = path;
-        const error = new ErrorTypes.RenderError(e);
-        error.component = path;
-        error.state = state;
+        let error;
+        if (e instanceof ErrorTypes.CompilerError) {
+          error = e;
+        } else {
+          error = new ErrorTypes.RenderError(e);
+          error.component = path;
+          error.state = state;
+        }
         this.emit('error', error);
       });
 

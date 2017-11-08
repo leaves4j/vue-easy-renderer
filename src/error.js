@@ -7,13 +7,14 @@
  * @extends {Error}
  */
 class BaseError extends Error {
-  type: 'VueEasyRendererError';
+  type: string;
   name: string;
-  constructor(e: ?Error): void {
+  constructor(e: ?Error) {
+    if (e instanceof BaseError) return e;
     super();
-    this.type = 'VueEasyRendererError';
+    this.type = 'Error';
+    this.name = 'VueEasyRendererError';
     if (e) {
-      this.name = `[VueEasyRenderer]Error: ${e.name}`;
       this.stack = e.stack;
       this.message = e.message;
     }
@@ -27,17 +28,32 @@ class BaseError extends Error {
  * @extends {RendererError}
  */
 class RenderError extends BaseError {
+  type: string;
   state: ?Object;
   component: string;
   constructor(e: ?Error): void {
     super(e);
-    if (e) {
-      this.name = `[VueEasyRenderer]RenderError: ${e.name}`;
-    }
+    this.type = 'RenderError';
+  }
+}
+
+/**
+ * render error
+ * 
+ * @class RenderError
+ * @extends {RendererError}
+ */
+class CompilerError extends BaseError {
+  type: string;
+  errors: ?Array<string>;
+  constructor(e: ?Error): void {
+    super(e);
+    this.type = 'RenderError';
   }
 }
 
 module.exports = {
   BaseError,
   RenderError,
+  CompilerError,
 };

@@ -8,6 +8,7 @@ const webpack = require('webpack');
 const nodeVersion = require('node-version');
 const nodeExternals = require('webpack-node-externals');
 const webpackMerge = require('webpack-merge');
+const ErrorTypes = require('../error');
 
 const cacheMap: Map<string, any> = new Map();
 const compilingWaitingQueueMap: Map<string, Array<{
@@ -83,13 +84,15 @@ class Compiler implements ICompiler {
     return new Promise((resolve, reject) => {
       runner((error, stats) => {
         if (error) {
-          reject(error);
+          reject(new ErrorTypes.CompilerError(error));
           return;
         }
 
         const info = stats.toJson();
         if (stats.hasErrors()) {
-          reject(info.errors);
+          const e = new ErrorTypes.CompilerError();
+          e.errors = info.errors;
+          reject(e);
         } else {
           resolve();
         }
