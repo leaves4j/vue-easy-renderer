@@ -1,3 +1,8 @@
+v1.2.0 / 2017-11-08
+---
+### Changes
+  * add `CompilerError` type
+
 v1.1.1 / 2017-10-17
 ---
 ### Fixed
